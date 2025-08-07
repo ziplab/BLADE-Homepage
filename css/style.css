@@ -834,6 +834,17 @@ a:hover {
     box-shadow: var(--shadow-heavy);
 }
 
+.section-desc {
+    margin-top: 2rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-style: italic;
+    line-height: 1.6;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* ==========================================
    Citation Section
    ========================================== */
