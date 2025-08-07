@@ -78,10 +78,7 @@
             <h2 class="section-title">Abstract</h2>
             <div class="abstract-content">
                 <p>
-                    Diffusion transformers currently lead the field in high-quality video generation, but their slow iterative denoising process and prohibitive quadratic attention costs for long sequences create significant inference bottlenecks. While both step distillation and sparse attention mechanisms have shown promise as independent acceleration strategies, effectively combining these approaches presents critical challenges.
-                </p>
-                <p>
-                    We propose <strong>BLADE</strong> (<u>BL</u>ock‑sparse <u>A</u>ttention Meets step <u>D</u>istillation for <u>E</u>fficient video generation), an innovative data-free joint training framework that introduces: (1) an Adaptive Block-Sparse Attention (ASA) mechanism for dynamically generating content-aware sparsity masks, and (2) a sparsity-aware step distillation paradigm built upon Trajectory Distribution Matching (TDM).
+                    Diffusion transformers currently lead the field in high-quality video generation, but their slow iterative denoising process and prohibitive quadratic attention costs for long sequences create significant inference bottlenecks. While both step distillation and sparse attention mechanisms have shown promise as independent acceleration strategies, effectively combining these approaches presents critical challenges—training-free integration yields suboptimal results, while separately training sparse attention after step distillation requires prohibitively expensive high-quality video data. To overcome these limitations, we propose <strong>BLADE</strong> (<u>BL</u>ock‑sparse <u>A</u>ttention Meets step <u>D</u>istillation for <u>E</u>fficient video generation), an innovative data-free joint training framework that introduces: (1) an Adaptive Block-Sparse Attention (ASA) mechanism for dynamically generating content-aware sparsity masks to focus computation on salient spatiotemporal features, and (2) a sparsity-aware step distillation paradigm built upon Trajectory Distribution Matching (TDM) that directly incorporates sparsity into the distillation process rather than treating it as a separate compression step, with fast convergence. We validate BLADE on text-to-video models like CogVideoX-5B and Wan2.1-1.3B. Our framework demonstrates remarkable efficiency gains across different scales. On Wan2.1-1.3B, BLADE achieves a 14.10× end-to-end inference acceleration over a 50-step baseline. Moreover, on models such as CogVideoX-5B with short video sequence lengths, our framework delivers a robust 8.89× speedup. Crucially, the acceleration is accompanied by a consistent quality improvement. On the VBench-2.0 benchmark, BLADE boosts the score of CogVideoX-5B to 0.569 (from 0.534) and Wan2.1-1.3B to 0.570 (from 0.563), results that are further corroborated by superior ratings in human evaluations.
                 </p>
                 
                 <div class="key-results">
@@ -94,8 +91,8 @@
                         <div class="result-desc">speedup on CogVideoX-5B</div>
                     </div>
                     <div class="result-item">
-                        <div class="result-number">+0.035</div>
-                        <div class="result-desc">VBench-2.0 improvement</div>
+                        <div class="result-number">0.569</div>
+                        <div class="result-desc">VBench-2.0 CogVideoX score</div>
                     </div>
                 </div>
             </div>
@@ -128,7 +125,7 @@
                         <i class="fas fa-rocket"></i>
                     </div>
                     <h3>Significant Acceleration</h3>
-                    <p>Achieves remarkable speedups (14.10× on Wan2.1, 8.89× on CogVideoX) with consistent quality improvements on VBench-2.0 benchmarks.</p>
+                    <p>Achieves remarkable speedups (14.10× on Wan2.1-1.3B, 8.89× on CogVideoX-5B) with consistent quality improvements on VBench-2.0 benchmarks.</p>
                 </div>
             </div>
         </div>
