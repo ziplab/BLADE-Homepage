@@ -4,7 +4,7 @@ This is the official repository for Video-BLADE, a framework for efficient video
 
 ## 🌐 Homepage
 
-Visit our project homepage: [https://tacossp.github.io/VIDEO-BLADE/](https://tacossp.github.io/VIDEO-BLADE/)
+Visit our project homepage: [https://tacossp.github.io/BLADE-Homepage/](https://tacossp.github.io/BLADE-Homepage/)
 
 ## 🎯 主要特性
 
@@ -54,7 +54,7 @@ python3 -m http.server 8000
 ## 🌐 GitHub Pages部署
 
 本项目已部署到GitHub Pages，可通过以下URL访问：
-https://tacossp.github.io/VIDEO-BLADE/
+https://tacossp.github.io/BLADE-Homepage/
 
 ## 🔧 技术栈
 
