@@ -209,8 +209,8 @@
             <!-- Results Tabs -->
             <div class="results-tabs">
                 <button class="tab-btn active" data-tab="main-results">Main Results</button>
-                <button class="tab-btn" data-tab="ablation">Ablation Study</button>
-                <button class="tab-btn" data-tab="analysis">Analysis</button>
+                <button class="tab-btn" data-tab="ablation">Efficiency Analysis</button>
+                <button class="tab-btn" data-tab="analysis">Method Comparison</button>
             </div>
             
             <div class="results-content">
@@ -222,7 +222,7 @@
                             <div class="table-image">
                                 <img src="images/Table1.png" alt="Main experimental results on VBench-2.0" class="responsive-img">
                                 <p class="image-caption">
-                                    Comparison with state-of-the-art methods on VBench-2.0. BLADE achieves superior quality while maintaining significant speedup across different video generation models.
+                                    <strong>Table 1:</strong> Video Quality Evaluation on VBench-2.0. BLADE achieves superior quality while maintaining significant speedup across different video generation models.
                                 </p>
                             </div>
                         </div>
@@ -243,11 +243,11 @@
                 <div id="ablation" class="tab-content">
                     <div class="results-grid">
                         <div class="result-section full-width">
-                            <h3>Ablation Study Results</h3>
+                            <h3>Efficiency Analysis</h3>
                             <div class="table-image">
-                                <img src="images/Table2.png" alt="Ablation study results" class="responsive-img">
+                                <img src="images/Table2.png" alt="Efficiency analysis on Wan2.1-1.3B" class="responsive-img">
                                 <p class="image-caption">
-                                    Comprehensive ablation study demonstrating the effectiveness of each component in BLADE. Both ASA mechanism and TDM distillation contribute significantly to the final performance.
+                                    <strong>Table 2:</strong> Efficiency analysis on Wan2.1-1.3B (test on an H20). Our ASA kernel achieves 3.30× speedup with 14.10× end-to-end acceleration.
                                 </p>
                             </div>
                         </div>
@@ -258,11 +258,11 @@
                 <div id="analysis" class="tab-content">
                     <div class="results-grid">
                         <div class="result-section full-width">
-                            <h3>Detailed Analysis</h3>
+                            <h3>Sparse Attention Comparison</h3>
                             <div class="table-image">
-                                <img src="images/Table3.png" alt="Detailed analysis results" class="responsive-img">
+                                <img src="images/Table3.png" alt="Comparison of sparse attention methods" class="responsive-img">
                                 <p class="image-caption">
-                                    In-depth analysis of BLADE's performance across different scenarios, demonstrating consistent improvements in both efficiency and quality metrics.
+                                    <strong>Table 3:</strong> Comparison of training-free sparse attention methods on Wan2.1-1.3B (8-step distilled model). ASA significantly outperforms existing methods in both PSNR and SSIM.
                                 </p>
                             </div>
                         </div>
