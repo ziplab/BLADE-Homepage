@@ -143,26 +143,61 @@
     <section id="method" class="section">
         <div class="container">
             <h2 class="section-title">Method Overview</h2>
+            
+            <!-- Method Tabs -->
+            <div class="method-tabs">
+                <button class="tab-btn active" data-tab="framework">Overall Framework</button>
+                <button class="tab-btn" data-tab="asa">ASA Mechanism</button>
+            </div>
+            
             <div class="method-content">
-                <div class="method-diagram">
-                    <img src="images/method_overview.png" alt="BLADE Framework Overview" class="responsive-img">
-                    <p class="image-caption">
-                        The training mechanism of Video-BLADE within a single distillation interval. The Sparse Generator denoises the input to produce samples, which are then re-corrupted and evaluated using Distribution Matching Loss.
-                    </p>
+                <!-- Framework Tab -->
+                <div id="framework" class="tab-content active">
+                    <div class="method-diagram">
+                        <img src="images/method_overview.png" alt="BLADE Framework Overview" class="responsive-img">
+                        <p class="image-caption">
+                            The training mechanism of Video-BLADE within a single distillation interval. The Sparse Generator denoises the input to produce samples, which are then re-corrupted and evaluated using Distribution Matching Loss.
+                        </p>
+                    </div>
+                    
+                    <div class="method-description">
+                        <h3>BLADE Framework</h3>
+                        <p>
+                            Our framework is based on a student-teacher paradigm where the teacher is a pre-trained, high-quality multi-step diffusion model, and the student initially shares the same architecture but with standard self-attention layers replaced by our Adaptive Block-Sparse Attention (ASA) mechanism.
+                        </p>
+                        
+                        <h4>Key Components:</h4>
+                        <ul>
+                            <li><strong>Trajectory Distribution Matching:</strong> Data-free distillation process that matches the distribution of generated trajectories</li>
+                            <li><strong>Joint Training:</strong> Synergistic integration of sparsity and distillation for optimal performance</li>
+                            <li><strong>Teacher-Student Paradigm:</strong> Efficient knowledge transfer from multi-step to few-step generation</li>
+                        </ul>
+                    </div>
                 </div>
                 
-                <div class="method-description">
-                    <h3>BLADE Framework</h3>
-                    <p>
-                        Our framework is based on a student-teacher paradigm where the teacher is a pre-trained, high-quality multi-step diffusion model, and the student initially shares the same architecture but with standard self-attention layers replaced by our Adaptive Block-Sparse Attention (ASA) mechanism.
-                    </p>
+                <!-- ASA Tab -->
+                <div id="asa" class="tab-content">
+                    <div class="method-diagram">
+                        <img src="images/ASAv3.png" alt="Adaptive Block-Sparse Attention Mechanism" class="responsive-img">
+                        <p class="image-caption">
+                            The Adaptive Block-Sparse Attention (ASA) mechanism. ASA dynamically generates content-aware sparsity masks based on input features, enabling efficient attention computation while maintaining high-quality video generation.
+                        </p>
+                    </div>
                     
-                    <h4>Key Components:</h4>
-                    <ul>
-                        <li><strong>Adaptive Block-Sparse Attention (ASA):</strong> Dynamically generates content-aware sparsity masks</li>
-                        <li><strong>Trajectory Distribution Matching:</strong> Data-free distillation process</li>
-                        <li><strong>Joint Training:</strong> Synergistic integration of sparsity and distillation</li>
-                    </ul>
+                    <div class="method-description">
+                        <h3>Adaptive Block-Sparse Attention (ASA)</h3>
+                        <p>
+                            ASA is the core innovation that enables efficient video generation by dynamically determining which spatial-temporal regions require full attention computation and which can be safely sparsified without quality loss.
+                        </p>
+                        
+                        <h4>ASA Features:</h4>
+                        <ul>
+                            <li><strong>Dynamic Mask Generation:</strong> Content-aware sparsity patterns adapted to each input</li>
+                            <li><strong>Block-Sparse Structure:</strong> Computationally efficient attention patterns</li>
+                            <li><strong>Quality Preservation:</strong> Maintains generation quality while reducing computation</li>
+                            <li><strong>Temporal Consistency:</strong> Ensures coherent video generation across frames</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

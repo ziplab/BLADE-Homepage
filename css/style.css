@@ -461,11 +461,48 @@ a:hover {
 /* ==========================================
    Method Section
    ========================================== */
+.method-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.method-tabs .tab-btn {
+    background: none;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-medium);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+}
+
+.method-tabs .tab-btn:hover {
+    color: var(--primary-color);
+}
+
+.method-tabs .tab-btn.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
 .method-content {
-    display: grid;
+    margin-top: 2rem;
+}
+
+.method-content .tab-content {
+    display: none;
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
     align-items: center;
+}
+
+.method-content .tab-content.active {
+    display: grid;
 }
 
 .method-diagram {
