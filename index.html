@@ -45,21 +45,18 @@
             <div class="authors">
                 <div class="author-group">
                     <span class="author">Youping Gu<sup>1*</sup></span>
-                    <span class="author">XIAOLONG LI<sup>2*</sup></span>
-                    <span class="author">Yuhao Hu<sup>3†</sup></span>
-                    <span class="author">Bohan Zhuang<sup>4‡</sup></span>
+                    <span class="author">XIAOLONG LI<sup>1*</sup></span>
+                    <span class="author">Yuhao Hu<sup>2</sup></span>
+                    <span class="author">Bohan Zhuang<sup>1‡</sup></span>
                 </div>
                 
                 <div class="affiliations">
-                    <div class="affiliation"><sup>1</sup>University of Melbourne</div>
-                    <div class="affiliation"><sup>2</sup>Monash University</div>
-                    <div class="affiliation"><sup>3</sup>University of Sydney</div>
-                    <div class="affiliation"><sup>4</sup>University of Adelaide</div>
+                    <div class="affiliation"><sup>1</sup>Zhejiang University</div>
+                    <div class="affiliation"><sup>2</sup>Central Media Technology Institute, Huawei Technologies</div>
                 </div>
                 
                 <div class="author-notes">
                     <span><sup>*</sup>Equal contribution</span>
-                    <span><sup>†</sup>Project leader</span>
                     <span><sup>‡</sup>Corresponding author</span>
                 </div>
             </div>
@@ -71,9 +68,6 @@
                 <a href="https://github.com/Tacossp/VIDEO-BLADE" class="btn btn-secondary" target="_blank">
                     <i class="fab fa-github"></i> Code
                 </a>
-                <a href="assets/supplementary.pdf" class="btn btn-secondary">
-                    <i class="fas fa-file-alt"></i> Supplementary
-                </a>
             </div>
         </div>
     </header>
@@ -84,10 +78,7 @@
             <h2 class="section-title">Abstract</h2>
             <div class="abstract-content">
                 <p>
-                    Diffusion transformers currently lead the field in high-quality video generation, but their slow iterative denoising process and prohibitive quadratic attention costs for long sequences create significant inference bottlenecks. While both step distillation and sparse attention mechanisms have shown promise as independent acceleration strategies, effectively combining these approaches presents critical challenges.
-                </p>
-                <p>
-                    We propose <strong>BLADE</strong> (<u>BL</u>ock‑sparse <u>A</u>ttention Meets step <u>D</u>istillation for <u>E</u>fficient video generation), an innovative data-free joint training framework that introduces: (1) an Adaptive Block-Sparse Attention (ASA) mechanism for dynamically generating content-aware sparsity masks, and (2) a sparsity-aware step distillation paradigm built upon Trajectory Distribution Matching (TDM).
+                    Diffusion transformers currently lead the field in high-quality video generation, but their slow iterative denoising process and prohibitive quadratic attention costs for long sequences create significant inference bottlenecks. While both step distillation and sparse attention mechanisms have shown promise as independent acceleration strategies, effectively combining these approaches presents critical challenges—training-free integration yields suboptimal results, while separately training sparse attention after step distillation requires prohibitively expensive high-quality video data. To overcome these limitations, we propose <strong>BLADE</strong> (<u>BL</u>ock‑sparse <u>A</u>ttention Meets step <u>D</u>istillation for <u>E</u>fficient video generation), an innovative data-free joint training framework that introduces: (1) an Adaptive Block-Sparse Attention (ASA) mechanism for dynamically generating content-aware sparsity masks to focus computation on salient spatiotemporal features, and (2) a sparsity-aware step distillation paradigm built upon Trajectory Distribution Matching (TDM) that directly incorporates sparsity into the distillation process rather than treating it as a separate compression step, with fast convergence. We validate BLADE on text-to-video models like CogVideoX-5B and Wan2.1-1.3B. Our framework demonstrates remarkable efficiency gains across different scales. On Wan2.1-1.3B, BLADE achieves a 14.10× end-to-end inference acceleration over a 50-step baseline. Moreover, on models such as CogVideoX-5B with short video sequence lengths, our framework delivers a robust 8.89× speedup. Crucially, the acceleration is accompanied by a consistent quality improvement. On the VBench-2.0 benchmark, BLADE boosts the score of CogVideoX-5B to 0.569 (from 0.534) and Wan2.1-1.3B to 0.570 (from 0.563), results that are further corroborated by superior ratings in human evaluations.
                 </p>
                 
                 <div class="key-results">
@@ -100,8 +91,8 @@
                         <div class="result-desc">speedup on CogVideoX-5B</div>
                     </div>
                     <div class="result-item">
-                        <div class="result-number">+0.035</div>
-                        <div class="result-desc">VBench-2.0 improvement</div>
+                        <div class="result-number">0.569</div>
+                        <div class="result-desc">VBench-2.0 CogVideoX score</div>
                     </div>
                 </div>
             </div>
@@ -134,7 +125,7 @@
                         <i class="fas fa-rocket"></i>
                     </div>
                     <h3>Significant Acceleration</h3>
-                    <p>Achieves remarkable speedups (14.10× on Wan2.1, 8.89× on CogVideoX) with consistent quality improvements on VBench-2.0 benchmarks.</p>
+                    <p>Achieves remarkable speedups (14.10× on Wan2.1-1.3B, 8.89× on CogVideoX-5B) with consistent quality improvements on VBench-2.0 benchmarks.</p>
                 </div>
             </div>
         </div>
@@ -157,7 +148,7 @@
                     <div class="method-diagram">
                         <img src="images/method_overview.png" alt="BLADE Framework Overview" class="responsive-img">
                         <p class="image-caption">
-                            The training mechanism of Video-BLADE within a single distillation interval. The Sparse Generator denoises the input to produce samples, which are then re-corrupted and evaluated using Distribution Matching Loss.
+                            <strong>Figure 1:</strong> The training mechanism of Video-BLADE within a single distillation interval [t<sub>i-1</sub>, t<sub>i</sub>). The Sparse Generator (G<sub>θ</sub>) denoises the input x<sub>t_i</sub> to produce the sample x<sub>t_{i-1}</sub>. Crucially, this output is then re-corrupted with Gaussian noise to create an intermediate sample x<sub>t_j</sub>. A dedicated <strong>Fake Score</strong> model evaluates this re-noised sample. Its output is contrasted with the score from the <strong>Real Score</strong> model (which is the pre-trained teacher model) to compute the Distribution Matching Loss (∇<sub>θ</sub> D<sub>KL</sub>). This loss directly updates the student generator, forcing it to align its generation trajectory with the teacher's at a distributional level.
                         </p>
                     </div>
                     
@@ -181,7 +172,7 @@
                     <div class="method-diagram">
                         <img src="images/ASAv3.png" alt="Adaptive Block-Sparse Attention Mechanism" class="responsive-img">
                         <p class="image-caption">
-                            The Adaptive Block-Sparse Attention (ASA) mechanism. ASA dynamically generates content-aware sparsity masks based on input features, enabling efficient attention computation while maintaining high-quality video generation.
+                            <strong>Figure 2:</strong> The two-stage process for Adaptive Block-Sparse Attention mask generation. (1) The <em>Efficient Attention Prober</em> samples a few representative tokens (e.g., k=16) from each block to compute a low-cost max-pooled attention matrix P. (2) The <em>Threshold-based Mask Generator</em> sorts the scores in P and selects the top blocks that contain a specified threshold (e.g., 95%), producing the final binary mask M. To enrich the context for training, we augment the key matrix K by concatenating it with a pooled version: K = Concat(K, MeanPool<sub>n</sub>(K)), where MeanPool<sub>n</sub>(K) denotes mean pooling over a window of size n. During attention computation, the original K region uses the binary block mask M, while the pooled region receives a fixed additive mask of ln n, softly guiding attention without disrupting sparsity.
                         </p>
                     </div>
                     
@@ -212,8 +203,8 @@
             <!-- Results Tabs -->
             <div class="results-tabs">
                 <button class="tab-btn active" data-tab="main-results">Main Results</button>
-                <button class="tab-btn" data-tab="ablation">Ablation Study</button>
-                <button class="tab-btn" data-tab="analysis">Analysis</button>
+                <button class="tab-btn" data-tab="ablation">Efficiency Analysis</button>
+                <button class="tab-btn" data-tab="analysis">Method Comparison</button>
             </div>
             
             <div class="results-content">
@@ -225,7 +216,7 @@
                             <div class="table-image">
                                 <img src="images/Table1.png" alt="Main experimental results on VBench-2.0" class="responsive-img">
                                 <p class="image-caption">
-                                    Comparison with state-of-the-art methods on VBench-2.0. BLADE achieves superior quality while maintaining significant speedup across different video generation models.
+                                    <strong>Table 1:</strong> Video Quality Evaluation on VBench-2.0. BLADE achieves superior quality while maintaining significant speedup across different video generation models.
                                 </p>
                             </div>
                         </div>
@@ -246,11 +237,11 @@
                 <div id="ablation" class="tab-content">
                     <div class="results-grid">
                         <div class="result-section full-width">
-                            <h3>Ablation Study Results</h3>
+                            <h3>Efficiency Analysis</h3>
                             <div class="table-image">
-                                <img src="images/Table2.png" alt="Ablation study results" class="responsive-img">
+                                <img src="images/Table2.png" alt="Efficiency analysis on Wan2.1-1.3B" class="responsive-img">
                                 <p class="image-caption">
-                                    Comprehensive ablation study demonstrating the effectiveness of each component in BLADE. Both ASA mechanism and TDM distillation contribute significantly to the final performance.
+                                    <strong>Table 2:</strong> Efficiency analysis on Wan2.1-1.3B (test on an H20). Our ASA kernel achieves 3.30× speedup with 14.10× end-to-end acceleration.
                                 </p>
                             </div>
                         </div>
@@ -261,11 +252,11 @@
                 <div id="analysis" class="tab-content">
                     <div class="results-grid">
                         <div class="result-section full-width">
-                            <h3>Detailed Analysis</h3>
+                            <h3>Sparse Attention Comparison</h3>
                             <div class="table-image">
-                                <img src="images/Table3.png" alt="Detailed analysis results" class="responsive-img">
+                                <img src="images/Table3.png" alt="Comparison of sparse attention methods" class="responsive-img">
                                 <p class="image-caption">
-                                    In-depth analysis of BLADE's performance across different scenarios, demonstrating consistent improvements in both efficiency and quality metrics.
+                                    <strong>Table 3:</strong> Comparison of training-free sparse attention methods on Wan2.1-1.3B (8-step distilled model). ASA significantly outperforms existing methods in both PSNR and SSIM.
                                 </p>
                             </div>
                         </div>
