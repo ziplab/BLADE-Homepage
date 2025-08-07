@@ -611,6 +611,100 @@ a:hover {
     color: var(--text-primary);
 }
 
+/* ==========================================
+   Video Demonstrations Section
+   ========================================== */
+.video-model-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.video-model-tabs .tab-btn {
+    background: none;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-medium);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+}
+
+.video-model-tabs .tab-btn:hover {
+    color: var(--primary-color);
+}
+
+.video-model-tabs .tab-btn.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+.video-content {
+    margin-top: 2rem;
+}
+
+.video-content .tab-content {
+    display: none;
+}
+
+.video-content .tab-content.active {
+    display: block;
+}
+
+.video-comparison-grid {
+    display: grid;
+    gap: 3rem;
+}
+
+.video-comparison {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    background: white;
+    box-shadow: var(--shadow-light);
+}
+
+.video-comparison h4 {
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.video-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.video-item {
+    text-align: center;
+}
+
+.video-item h5 {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.video-item video {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-medium);
+    background: var(--background-dark);
+}
+
+.video-item video:hover {
+    box-shadow: var(--shadow-heavy);
+}
+
 .performance-table {
     background: white;
     border-radius: var(--border-radius);

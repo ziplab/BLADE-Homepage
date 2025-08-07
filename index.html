@@ -26,6 +26,7 @@
                 <a href="#contributions">Contributions</a>
                 <a href="#method">Method</a>
                 <a href="#results">Results</a>
+                <a href="#videos">Videos</a>
                 <a href="#gallery">Gallery</a>
                 <a href="#citation">Citation</a>
             </div>
@@ -274,6 +275,241 @@
         </div>
     </section>
 
+    <!-- Video Demonstrations -->
+    <section id="videos" class="section">
+        <div class="container">
+            <h2 class="section-title">Video Demonstrations</h2>
+            
+            <!-- Model Selection Tabs -->
+            <div class="video-model-tabs">
+                <button class="tab-btn active" data-tab="cogvideox">CogVideoX-5B</button>
+                <button class="tab-btn" data-tab="wanx">WanX 2.1</button>
+            </div>
+            
+            <div class="video-content">
+                <!-- CogVideoX Tab -->
+                <div id="cogvideox" class="tab-content active">
+                    <div class="video-comparison-grid">
+                        <!-- Video Comparison 1: Helping with books -->
+                        <div class="video-comparison">
+                            <h4>One person helps another person pick up their books</h4>
+                            <div class="video-pair">
+                                <div class="video-item">
+                                    <h5>Baseline (50 steps)</h5>
+                                    <video controls preload="metadata" loading="lazy">
+                                        <source src="videos/cogvideox_baseline_p1.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <div class="video-item">
+                                    <h5>BLADE (8 steps)</h5>
+                                    <video controls preload="metadata" loading="lazy">
+                                        <source src="videos/cogvideox_blade_p1.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Video Comparison 2: Eating spaghetti -->
+                        <div class="video-comparison">
+                            <h4>A person is eating spaghetti with a fork</h4>
+                            <div class="video-pair">
+                                <div class="video-item">
+                                    <h5>Baseline (50 steps)</h5>
+                                    <video controls preload="metadata" loading="lazy">
+                                        <source src="videos/cogvideox_baseline_p3.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <div class="video-item">
+                                    <h5>BLADE (8 steps)</h5>
+                                    <video controls preload="metadata" loading="lazy">
+                                        <source src="videos/cogvideox_blade_p3.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Video Comparison 3: Ball bouncing -->
+                        <div class="video-comparison">
+                            <h4>A red ball bouncing down stairs</h4>
+                            <div class="video-pair">
+                                <div class="video-item">
+                                    <h5>Baseline (50 steps)</h5>
+                                    <video controls preload="metadata" loading="lazy">
+                                        <source src="videos/cogvideox_baseline_p8.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <div class="video-item">
+                                    <h5>BLADE (8 steps)</h5>
+                                    <video controls preload="metadata" loading="lazy">
+                                        <source src="videos/cogvideox_blade_p8.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Video Comparison 4: Camera orbiting rocket -->
+                        <div class="video-comparison">
+                            <h4>The camera orbits around. Rocket, the camera circles around</h4>
+                            <div class="video-pair">
+                                <div class="video-item">
+                                    <h5>Baseline (50 steps)</h5>
+                                    <video controls preload="metadata" loading="lazy">
+                                        <source src="videos/cogvideox_baseline_p11.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <div class="video-item">
+                                    <h5>BLADE (8 steps)</h5>
+                                    <video controls preload="metadata" loading="lazy">
+                                        <source src="videos/cogvideox_blade_p11.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Video Comparison 5: Gemstone changing -->
+                        <div class="video-comparison">
+                            <h4>A gemstone changes from dull to bright</h4>
+                            <div class="video-pair">
+                                <div class="video-item">
+                                    <h5>Baseline (50 steps)</h5>
+                                    <video controls preload="metadata" loading="lazy">
+                                        <source src="videos/cogvideox_baseline_p13.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <div class="video-item">
+                                    <h5>BLADE (8 steps)</h5>
+                                    <video controls preload="metadata" loading="lazy">
+                                        <source src="videos/cogvideox_blade_p13.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WanX Tab -->
+                <div id="wanx" class="tab-content">
+                    <div class="video-comparison-grid">
+                        <!-- Video Comparison 1: Opening door -->
+                        <div class="video-comparison">
+                            <h4>One person opens the door for another person</h4>
+                            <div class="video-pair">
+                                <div class="video-item">
+                                    <h5>Baseline (50 steps)</h5>
+                                    <video controls preload="metadata" loading="lazy">
+                                        <source src="videos/wanx_baseline_p1.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <div class="video-item">
+                                    <h5>BLADE (8 steps)</h5>
+                                    <video controls preload="metadata" loading="lazy">
+                                        <source src="videos/wanx_blade_p1.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Video Comparison 2: Taj Mahal -->
+                        <div class="video-comparison">
+                            <h4>The camera orbits around. Taj Mahal, the camera circles around</h4>
+                            <div class="video-pair">
+                                <div class="video-item">
+                                    <h5>Baseline (50 steps)</h5>
+                                    <video controls preload="metadata" loading="lazy">
+                                        <source src="videos/wanx_baseline_p3.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <div class="video-item">
+                                    <h5>BLADE (8 steps)</h5>
+                                    <video controls preload="metadata" loading="lazy">
+                                        <source src="videos/wanx_blade_p3.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Video Comparison 3: Cheetah with tortoise shell -->
+                        <div class="video-comparison">
+                            <h4>A cheetah with the shell of a tortoise, moving quickly but with a protective outer layer</h4>
+                            <div class="video-pair">
+                                <div class="video-item">
+                                    <h5>Baseline (50 steps)</h5>
+                                    <video controls preload="metadata" loading="lazy">
+                                        <source src="videos/wanx_baseline_p7.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <div class="video-item">
+                                    <h5>BLADE (8 steps)</h5>
+                                    <video controls preload="metadata" loading="lazy">
+                                        <source src="videos/wanx_blade_p7.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Video Comparison 4: Playing ping-pong -->
+                        <div class="video-comparison">
+                            <h4>A woman is playing ping-pong</h4>
+                            <div class="video-pair">
+                                <div class="video-item">
+                                    <h5>Baseline (50 steps)</h5>
+                                    <video controls preload="metadata" loading="lazy">
+                                        <source src="videos/wanx_baseline_p10.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <div class="video-item">
+                                    <h5>BLADE (8 steps)</h5>
+                                    <video controls preload="metadata" loading="lazy">
+                                        <source src="videos/wanx_blade_p10.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Video Comparison 5: Birdhouse -->
+                        <div class="video-comparison">
+                            <h4>The camera orbits around. Birdhouse, the camera circles around</h4>
+                            <div class="video-pair">
+                                <div class="video-item">
+                                    <h5>Baseline (50 steps)</h5>
+                                    <video controls preload="metadata" loading="lazy">
+                                        <source src="videos/wanx_baseline_p14.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <div class="video-item">
+                                    <h5>BLADE (8 steps)</h5>
+                                    <video controls preload="metadata" loading="lazy">
+                                        <source src="videos/wanx_blade_p14.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Visual Gallery -->
     <section id="gallery" class="section">
         <div class="container">
@@ -343,6 +579,7 @@
                 <a href="#abstract">Abstract</a>
                 <a href="#method">Method</a>
                 <a href="#results">Results</a>
+                <a href="#videos">Videos</a>
                 <a href="#citation">Citation</a>
             </div>
         </div>
