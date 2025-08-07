@@ -76,11 +76,11 @@
       Youping~Gu$^{1}$\thanks{Equal contribution.} \;
       XIAOLONG~LI$^{1}$\footnotemark[1] \;
       Yuhao~Hu$^{2}$ \;
-      Bohan~Zhuang$^{1}$\thanks{Corresponding author. Email: bohan.zhuang @gmail.com}
+      Bohan~Zhuang$^{1}$\thanks{Corresponding author. Email: bohan.zhuang@gmail.com}
       \\[0.6em]
       \normalsize
-      $^{1}$ZIP~Lab,Zhejiang~University  \quad
-      $^{2}$Huawei Central Media Technology Institute
+      $^{1}$Zhejiang~University  \quad
+      $^{2}$Central Media Technology Institute, Huawei Technologies
     }
 \fi
 
@@ -426,6 +426,9 @@ In this paper, we introduced \textbf{BLADE}, a novel framework that effectively 
 Our contributions are validated through extensive experiments on various video models, demonstrating marked improvements in kernel-level efficiency, end-to-end inference speed, and generation quality as measured by both automated benchmarks (VBench-2.0) and human evaluations.
 
 \noindent\textbf{Limitations and future work.} While Video-BLADE exhibits strong performance, we acknowledge several limitations that point to promising directions for future research. First, our current experiments are limited to video sequences of moderate length. Extending and validating the ASA mechanism for generating minute-long videos with hundreds of thousands of tokens remains an important next step. Additionally, our current ASA kernel is implemented in Triton for simplicity, which prevents it from fully realizing the theoretical speedup. In future work, we plan to develop a more optimized CUDA implementation to better leverage the efficiency potential of ASA. These directions underscore the importance of evaluating ASA in more demanding settings and exploring further architectural enhancements. Lastly, the idea of sparsity-aware training as a form of regularization shows promise and could be extended to other generative domains beyond video synthesis.
+
+\section{Acknowledgement}
+This work was supported by the Central Media Technology Institute, Huawei Technologies, through a technology cooperation.
 
 
 

@@ -146,3 +146,8 @@ homepage/
 ## 仓库信息
 
 - **BLADE论文GitHub仓库**: https://github.com/Tacossp/VIDEO-BLADE
+
+## 重要备注
+
+- **method_overview是论文中的figure1**
+- **ASAv3是论文中的figure2**
