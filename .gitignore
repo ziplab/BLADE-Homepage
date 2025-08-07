@@ -1,0 +1,30 @@
+# LaTeX files
+*.tex
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+
+# Backup files
+*.bak
+*.backup
+
+# Large video files (optional - keep for now)
+# All_videos/
+
+# Assets that don't exist
+assets/paper.pdf
