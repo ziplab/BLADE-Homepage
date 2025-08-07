@@ -161,9 +161,9 @@
                         
                         <h4>Key Components:</h4>
                         <ul>
-                            <li><strong>Trajectory Distribution Matching:</strong> Data-free distillation process that matches the distribution of generated trajectories</li>
-                            <li><strong>Joint Training:</strong> Synergistic integration of sparsity and distillation for optimal performance</li>
-                            <li><strong>Teacher-Student Paradigm:</strong> Efficient knowledge transfer from multi-step to few-step generation</li>
+                            <li>The pre-trained <strong>teacher model</strong> f<sub>φ</sub>, which provides the real data score s<sub>φ</sub>.</li>
+                            <li>The <strong>student generator</strong> G<sub>θ</sub>, which learns to produce high-fidelity samples in a few steps.</li>
+                            <li>A <strong>fake score model</strong> f<sub>ψ</sub>, which provides the fake score s<sub>ψ</sub> by approximating the student's intractable sample score.</li>
                         </ul>
                     </div>
                 </div>
