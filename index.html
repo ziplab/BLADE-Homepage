@@ -27,8 +27,6 @@
                 <a href="#method">Method</a>
                 <a href="#results">Results</a>
                 <a href="#videos">Videos</a>
-                <a href="#gallery">Gallery</a>
-                <a href="#citation">Citation</a>
             </div>
         </div>
     </nav>
@@ -36,7 +34,14 @@
     <!-- Header -->
     <header class="hero">
         <div class="container">
-            <div class="conference-badge">ICLR 2025</div>
+            <div class="institution-logos">
+                <div class="logo-item">
+                    <img src="images/zju-logo.png" alt="Zhejiang University" class="institution-logo">
+                </div>
+                <div class="logo-item">
+                    <img src="images/huawei-logo.png" alt="Huawei Technologies" class="institution-logo">
+                </div>
+            </div>
             
             <h1 class="title">
                 <span class="highlight">Video-BLADE</span>: Block-Sparse Attention Meets Step Distillation for Efficient Video Generation
@@ -148,7 +153,7 @@
                     <div class="method-diagram">
                         <img src="images/method_overview.png" alt="BLADE Framework Overview" class="responsive-img">
                         <p class="image-caption">
-                            <strong>Figure 1:</strong> The training mechanism of Video-BLADE within a single distillation interval [t<sub>i-1</sub>, t<sub>i</sub>). The Sparse Generator (G<sub>θ</sub>) denoises the input x<sub>t_i</sub> to produce the sample x<sub>t_{i-1}</sub>. Crucially, this output is then re-corrupted with Gaussian noise to create an intermediate sample x<sub>t_j</sub>. A dedicated <strong>Fake Score</strong> model evaluates this re-noised sample. Its output is contrasted with the score from the <strong>Real Score</strong> model (which is the pre-trained teacher model) to compute the Distribution Matching Loss (∇<sub>θ</sub> D<sub>KL</sub>). This loss directly updates the student generator, forcing it to align its generation trajectory with the teacher's at a distributional level.
+                            <strong>Figure 1:</strong> The training mechanism of Video-BLADE within a single distillation interval [t<sub>i-1</sub>, t<sub>i</sub>). The Sparse Generator (G<sub>θ</sub>) denoises the input x<sub>t<sub>i</sub></sub> to produce the sample x<sub>t<sub>i-1</sub></sub>. Crucially, this output is then re-corrupted with Gaussian noise to create an intermediate sample x<sub>t<sub>j</sub></sub>. A dedicated <strong>Fake Score</strong> model evaluates this re-noised sample. Its output is contrasted with the score from the <strong>Real Score</strong> model (which is the pre-trained teacher model) to compute the Distribution Matching Loss (∇<sub>θ</sub> D<sub>KL</sub>). This loss directly updates the student generator, forcing it to align its generation trajectory with the teacher's at a distributional level.
                         </p>
                     </div>
                     
@@ -172,7 +177,7 @@
                     <div class="method-diagram">
                         <img src="images/ASAv3.png" alt="Adaptive Block-Sparse Attention Mechanism" class="responsive-img">
                         <p class="image-caption">
-                            <strong>Figure 2:</strong> The two-stage process for Adaptive Block-Sparse Attention mask generation. (1) The <em>Efficient Attention Prober</em> samples a few representative tokens (e.g., k=16) from each block to compute a low-cost max-pooled attention matrix P. (2) The <em>Threshold-based Mask Generator</em> sorts the scores in P and selects the top blocks that contain a specified threshold (e.g., 95%), producing the final binary mask M. To enrich the context for training, we augment the key matrix K by concatenating it with a pooled version: K = Concat(K, MeanPool<sub>n</sub>(K)), where MeanPool<sub>n</sub>(K) denotes mean pooling over a window of size n. During attention computation, the original K region uses the binary block mask M, while the pooled region receives a fixed additive mask of ln n, softly guiding attention without disrupting sparsity.
+                            <strong>Figure 2:</strong> The two-stage process for Adaptive Block-Sparse Attention mask generation. (1) The <em>Efficient Attention Prober</em> samples a few representative tokens (e.g., k=16) from each block to compute a low-cost max-pooled attention matrix P. (2) The <em>Threshold-based Mask Generator</em> sorts the scores in P and selects the top blocks that contain a specified threshold (e.g., 95%), producing the final binary mask M. To enrich the context for training, we augment the key matrix K by concatenating it with a pooled version: K = Concat(K, MeanPool<sub>n</sub>(K)), where MeanPool<sub>n</sub>(K) denotes mean pooling over a window of size n. During attention computation, the original K region uses the binary block mask M, while the pooled region receives a fixed additive mask of ln(n), softly guiding attention without disrupting sparsity.
                         </p>
                     </div>
                     
@@ -211,22 +216,12 @@
                 <!-- Main Results Tab -->
                 <div id="main-results" class="tab-content active">
                     <div class="results-grid">
-                        <div class="result-section">
+                        <div class="result-section full-width">
                             <h3>Performance on VBench-2.0</h3>
                             <div class="table-image">
                                 <img src="images/Table1.png" alt="Main experimental results on VBench-2.0" class="responsive-img">
                                 <p class="image-caption">
                                     <strong>Table 1:</strong> Video Quality Evaluation on VBench-2.0. BLADE achieves superior quality while maintaining significant speedup across different video generation models.
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <div class="result-section">
-                            <h3>Speed vs Quality Trade-off</h3>
-                            <div class="chart-placeholder">
-                                <img src="images/performance_chart.png" alt="Performance Chart" class="responsive-img">
-                                <p class="image-caption">
-                                    BLADE achieves the best trade-off between generation speed and video quality, outperforming existing acceleration methods.
                                 </p>
                             </div>
                         </div>
@@ -501,50 +496,9 @@
         </div>
     </section>
 
-    <!-- Visual Gallery -->
-    <section id="gallery" class="section">
-        <div class="container">
-            <h2 class="section-title">Visual Results</h2>
-            <div class="gallery-tabs">
-                <button class="tab-btn active" data-tab="comparisons">Quality Comparisons</button>
-                <button class="tab-btn" data-tab="samples">Generated Samples</button>
-            </div>
-            
-            <div class="gallery-content">
-                <div id="comparisons" class="tab-content active">
-                    <div class="comparison-grid">
-                        <div class="comparison-item">
-                            <h4>Baseline (50 steps)</h4>
-                            <img src="images/baseline_sample1.jpg" alt="Baseline Result" class="gallery-img">
-                        </div>
-                        <div class="comparison-item">
-                            <h4>BLADE (8 steps)</h4>
-                            <img src="images/blade_sample1.jpg" alt="BLADE Result" class="gallery-img">
-                        </div>
-                    </div>
-                    <p class="section-desc">
-                        Direct quality comparison shows BLADE maintains visual fidelity while achieving significant speedup. 
-                        BLADE (8 steps) produces results comparable to or better than baseline (50 steps).
-                    </p>
-                </div>
-                
-                <div id="samples" class="tab-content">
-                    <div class="samples-grid">
-                        <img src="images/sample1.jpg" alt="Generated Sample" class="gallery-img">
-                        <img src="images/sample2.jpg" alt="Generated Sample" class="gallery-img">
-                        <img src="images/sample3.jpg" alt="Generated Sample" class="gallery-img">
-                        <img src="images/sample4.jpg" alt="Generated Sample" class="gallery-img">
-                    </div>
-                    <p class="section-desc">
-                        Representative samples generated by BLADE demonstrate high-quality video synthesis across diverse scenarios and motions.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Citation -->
-    <section id="citation" class="section bg-light">
+    <section id="citation" class="section bg-light" style="display:none">
         <div class="container">
             <h2 class="section-title">Citation</h2>
             <div class="citation-box">
@@ -570,7 +524,6 @@
                 <a href="#method">Method</a>
                 <a href="#results">Results</a>
                 <a href="#videos">Videos</a>
-                <a href="#citation">Citation</a>
             </div>
         </div>
     </footer>

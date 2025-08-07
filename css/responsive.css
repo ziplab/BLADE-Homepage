@@ -108,6 +108,20 @@
         text-align: center;
     }
     
+    .institution-logos {
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .logo-item {
+        padding: 0.8rem 1rem;
+    }
+    
+    .institution-logo {
+        max-height: 45px;
+        max-width: 90px;
+    }
+    
     .hero-buttons {
         flex-direction: column;
         align-items: center;
@@ -287,9 +301,19 @@
         line-height: 1.3;
     }
     
-    .conference-badge {
-        font-size: 0.8rem;
-        padding: 0.4rem 1rem;
+    .institution-logos {
+        gap: 1rem;
+        flex-direction: column;
+        margin-bottom: 1rem;
+    }
+    
+    .logo-item {
+        padding: 0.6rem 1rem;
+    }
+    
+    .institution-logo {
+        max-height: 35px;
+        max-width: 70px;
     }
     
     .author-notes span {

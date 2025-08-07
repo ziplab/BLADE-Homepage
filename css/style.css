@@ -205,19 +205,38 @@ a:hover {
     66% { transform: translate(1%, -0.5%) rotate(-1deg); }
 }
 
-.conference-badge {
-    display: inline-block;
-    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
-    color: white;
-    padding: 0.5rem 1.5rem;
-    border-radius: 2rem;
-    font-weight: 600;
-    font-size: 0.9rem;
-    letter-spacing: 0.5px;
+.institution-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
     margin-bottom: 2rem;
-    box-shadow: var(--shadow-medium);
     position: relative;
     z-index: 1;
+}
+
+.logo-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: var(--border-radius);
+    padding: 1rem 1.5rem;
+    box-shadow: var(--shadow-light);
+    transition: all var(--transition-medium);
+}
+
+.logo-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-heavy);
+}
+
+.institution-logo {
+    max-height: 60px;
+    max-width: 120px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
 }
 
 .title {
@@ -492,6 +511,16 @@ a:hover {
     border-bottom-color: var(--primary-color);
 }
 
+.method-tabs .tab-btn:focus {
+    outline: none;
+    color: var(--primary-color);
+    background: rgba(37, 99, 235, 0.05);
+}
+
+.method-tabs .tab-btn:active {
+    background: rgba(37, 99, 235, 0.1);
+}
+
 .method-content {
     margin-top: 2rem;
 }
@@ -582,6 +611,16 @@ a:hover {
     border-bottom-color: var(--primary-color);
 }
 
+.results-tabs .tab-btn:focus {
+    outline: none;
+    color: var(--primary-color);
+    background: rgba(37, 99, 235, 0.05);
+}
+
+.results-tabs .tab-btn:active {
+    background: rgba(37, 99, 235, 0.1);
+}
+
 .results-content {
     margin-top: 2rem;
 }
@@ -643,6 +682,16 @@ a:hover {
 .video-model-tabs .tab-btn.active {
     color: var(--primary-color);
     border-bottom-color: var(--primary-color);
+}
+
+.video-model-tabs .tab-btn:focus {
+    outline: none;
+    color: var(--primary-color);
+    background: rgba(37, 99, 235, 0.05);
+}
+
+.video-model-tabs .tab-btn:active {
+    background: rgba(37, 99, 235, 0.1);
 }
 
 .video-content {
@@ -764,12 +813,13 @@ a:hover {
 .tab-btn {
     padding: 0.75rem 1.5rem;
     background: var(--background-light);
-    border: 1px solid var(--border-color);
+    border: 2px solid var(--primary-color);
     border-radius: var(--border-radius);
     cursor: pointer;
     transition: all var(--transition-fast);
     font-weight: 500;
-    color: var(--text-primary);
+    color: var(--primary-color);
+    box-shadow: var(--shadow-light);
 }
 
 .tab-btn.active,
@@ -777,6 +827,17 @@ a:hover {
     background: var(--primary-color);
     color: white;
     border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-heavy);
+}
+
+.tab-btn:focus {
+    outline: none;
+    box-shadow: var(--shadow-heavy), 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.tab-btn:active {
+    transform: translateY(0px);
 }
 
 .tab-content {
