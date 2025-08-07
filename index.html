@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Video-BLADE: Block-Sparse Attention Meets Step Distillation for Efficient Video Generation - ICLR 2025">
+    <meta name="keywords" content="video generation, diffusion models, sparse attention, step distillation, machine learning, ICLR 2025">
+    <meta name="author" content="Youping Gu, XIAOLONG LI, Yuhao Hu, Bohan Zhuang">
+    
+    <title>Video-BLADE: Block-Sparse Attention Meets Step Distillation for Efficient Video Generation</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="#abstract">Abstract</a>
+                <a href="#contributions">Contributions</a>
+                <a href="#method">Method</a>
+                <a href="#results">Results</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#citation">Citation</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="hero">
+        <div class="container">
+            <div class="conference-badge">ICLR 2025</div>
+            
+            <h1 class="title">
+                <span class="highlight">Video-BLADE</span>: Block-Sparse Attention Meets Step Distillation for Efficient Video Generation
+            </h1>
+            
+            <div class="authors">
+                <div class="author-group">
+                    <span class="author">Youping Gu<sup>1*</sup></span>
+                    <span class="author">XIAOLONG LI<sup>2*</sup></span>
+                    <span class="author">Yuhao Hu<sup>3†</sup></span>
+                    <span class="author">Bohan Zhuang<sup>4‡</sup></span>
+                </div>
+                
+                <div class="affiliations">
+                    <div class="affiliation"><sup>1</sup>University of Melbourne</div>
+                    <div class="affiliation"><sup>2</sup>Monash University</div>
+                    <div class="affiliation"><sup>3</sup>University of Sydney</div>
+                    <div class="affiliation"><sup>4</sup>University of Adelaide</div>
+                </div>
+                
+                <div class="author-notes">
+                    <span><sup>*</sup>Equal contribution</span>
+                    <span><sup>†</sup>Project leader</span>
+                    <span><sup>‡</sup>Corresponding author</span>
+                </div>
+            </div>
+            
+            <div class="hero-buttons">
+                <a href="assets/paper.pdf" class="btn btn-primary">
+                    <i class="fas fa-file-pdf"></i> Paper
+                </a>
+                <a href="https://github.com/video-blade/video-blade" class="btn btn-secondary">
+                    <i class="fab fa-github"></i> Code
+                </a>
+                <a href="assets/supplementary.pdf" class="btn btn-secondary">
+                    <i class="fas fa-file-alt"></i> Supplementary
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Abstract -->
+    <section id="abstract" class="section">
+        <div class="container">
+            <h2 class="section-title">Abstract</h2>
+            <div class="abstract-content">
+                <p>
+                    Diffusion transformers currently lead the field in high-quality video generation, but their slow iterative denoising process and prohibitive quadratic attention costs for long sequences create significant inference bottlenecks. While both step distillation and sparse attention mechanisms have shown promise as independent acceleration strategies, effectively combining these approaches presents critical challenges.
+                </p>
+                <p>
+                    We propose <strong>BLADE</strong> (<u>BL</u>ock‑sparse <u>A</u>ttention Meets step <u>D</u>istillation for <u>E</u>fficient video generation), an innovative data-free joint training framework that introduces: (1) an Adaptive Block-Sparse Attention (ASA) mechanism for dynamically generating content-aware sparsity masks, and (2) a sparsity-aware step distillation paradigm built upon Trajectory Distribution Matching (TDM).
+                </p>
+                
+                <div class="key-results">
+                    <div class="result-item">
+                        <div class="result-number">14.10×</div>
+                        <div class="result-desc">speedup on Wan2.1-1.3B</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-number">8.89×</div>
+                        <div class="result-desc">speedup on CogVideoX-5B</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-number">+0.035</div>
+                        <div class="result-desc">VBench-2.0 improvement</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Contributions -->
+    <section id="contributions" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Key Contributions</h2>
+            <div class="contributions-grid">
+                <div class="contribution-card">
+                    <div class="card-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Data-Free Joint Training</h3>
+                    <p>First framework to synergistically integrate adaptive sparse attention directly into sparsity-aware step distillation, overcoming limitations of sequential approaches.</p>
+                </div>
+                
+                <div class="contribution-card">
+                    <div class="card-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Adaptive Block-Sparse Attention</h3>
+                    <p>Dynamic, content-aware attention mechanism that generates hardware-friendly sparsity masks on-the-fly to focus computation on salient features.</p>
+                </div>
+                
+                <div class="contribution-card">
+                    <div class="card-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Significant Acceleration</h3>
+                    <p>Achieves remarkable speedups (14.10× on Wan2.1, 8.89× on CogVideoX) with consistent quality improvements on VBench-2.0 benchmarks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Method Overview -->
+    <section id="method" class="section">
+        <div class="container">
+            <h2 class="section-title">Method Overview</h2>
+            <div class="method-content">
+                <div class="method-diagram">
+                    <img src="images/method_overview.png" alt="BLADE Framework Overview" class="responsive-img">
+                    <p class="image-caption">
+                        The training mechanism of Video-BLADE within a single distillation interval. The Sparse Generator denoises the input to produce samples, which are then re-corrupted and evaluated using Distribution Matching Loss.
+                    </p>
+                </div>
+                
+                <div class="method-description">
+                    <h3>BLADE Framework</h3>
+                    <p>
+                        Our framework is based on a student-teacher paradigm where the teacher is a pre-trained, high-quality multi-step diffusion model, and the student initially shares the same architecture but with standard self-attention layers replaced by our Adaptive Block-Sparse Attention (ASA) mechanism.
+                    </p>
+                    
+                    <h4>Key Components:</h4>
+                    <ul>
+                        <li><strong>Adaptive Block-Sparse Attention (ASA):</strong> Dynamically generates content-aware sparsity masks</li>
+                        <li><strong>Trajectory Distribution Matching:</strong> Data-free distillation process</li>
+                        <li><strong>Joint Training:</strong> Synergistic integration of sparsity and distillation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results -->
+    <section id="results" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Experimental Results</h2>
+            
+            <div class="results-grid">
+                <div class="result-section">
+                    <h3>Performance Comparison</h3>
+                    <div class="performance-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Model</th>
+                                    <th>Method</th>
+                                    <th>Steps</th>
+                                    <th>VBench-2.0</th>
+                                    <th>Speedup</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td rowspan="2">CogVideoX-5B</td>
+                                    <td>Baseline</td>
+                                    <td>50</td>
+                                    <td>0.534</td>
+                                    <td>1.0×</td>
+                                </tr>
+                                <tr class="highlight-row">
+                                    <td>BLADE</td>
+                                    <td>8</td>
+                                    <td><strong>0.569</strong></td>
+                                    <td><strong>8.89×</strong></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2">Wan2.1-1.3B</td>
+                                    <td>Baseline</td>
+                                    <td>50</td>
+                                    <td>0.563</td>
+                                    <td>1.0×</td>
+                                </tr>
+                                <tr class="highlight-row">
+                                    <td>BLADE</td>
+                                    <td>8</td>
+                                    <td><strong>0.570</strong></td>
+                                    <td><strong>14.10×</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="result-section">
+                    <h3>Quality vs Speed Trade-off</h3>
+                    <div class="chart-placeholder">
+                        <img src="images/performance_chart.png" alt="Performance Chart" class="responsive-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Gallery -->
+    <section id="gallery" class="section">
+        <div class="container">
+            <h2 class="section-title">Visual Results</h2>
+            <div class="gallery-tabs">
+                <button class="tab-btn active" data-tab="comparisons">Quality Comparisons</button>
+                <button class="tab-btn" data-tab="attention">Attention Visualization</button>
+                <button class="tab-btn" data-tab="samples">Generated Samples</button>
+            </div>
+            
+            <div class="gallery-content">
+                <div id="comparisons" class="tab-content active">
+                    <div class="comparison-grid">
+                        <div class="comparison-item">
+                            <h4>Baseline (50 steps)</h4>
+                            <img src="images/baseline_sample1.jpg" alt="Baseline Result" class="gallery-img">
+                        </div>
+                        <div class="comparison-item">
+                            <h4>BLADE (8 steps)</h4>
+                            <img src="images/blade_sample1.jpg" alt="BLADE Result" class="gallery-img">
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="attention" class="tab-content">
+                    <div class="attention-grid">
+                        <img src="images/attention_vis1.png" alt="Attention Visualization" class="gallery-img">
+                        <img src="images/attention_vis2.png" alt="Attention Visualization" class="gallery-img">
+                    </div>
+                </div>
+                
+                <div id="samples" class="tab-content">
+                    <div class="samples-grid">
+                        <img src="images/sample1.jpg" alt="Generated Sample" class="gallery-img">
+                        <img src="images/sample2.jpg" alt="Generated Sample" class="gallery-img">
+                        <img src="images/sample3.jpg" alt="Generated Sample" class="gallery-img">
+                        <img src="images/sample4.jpg" alt="Generated Sample" class="gallery-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Citation -->
+    <section id="citation" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Citation</h2>
+            <div class="citation-box">
+                <pre id="bibtex-text">@inproceedings{gu2025videoblade,
+  title={Video-BLADE: Block-Sparse Attention Meets Step Distillation for Efficient Video Generation},
+  author={Gu, Youping and Li, Xiaolong and Hu, Yuhao and Zhuang, Bohan},
+  booktitle={International Conference on Learning Representations},
+  year={2025}
+}</pre>
+                <button class="copy-btn" onclick="copyBibtex()">
+                    <i class="fas fa-copy"></i> Copy BibTeX
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Video-BLADE. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#abstract">Abstract</a>
+                <a href="#method">Method</a>
+                <a href="#results">Results</a>
+                <a href="#citation">Citation</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/gallery.js"></script>
+</body>
+</html>

@@ -1,0 +1,442 @@
+%File: aaai2026-unified-template.tex
+%
+% UNIFIED AAAI 2026 TEMPLATE
+% To switch between anonymous submission and camera-ready versions,
+% simply change the next line:
+%
+% For ANONYMOUS SUBMISSION: uncomment the next line
+% \def\aaaianonymous{true}
+%
+% For CAMERA-READY VERSION: comment out or delete the next line
+% \def\aaaianonymous{true}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[letterpaper]{article} % DO NOT CHANGE THIS
+
+% Conditional package loading based on versionOur training process is guided by a dataset of 10,000 high-quality text prompts. These prompts were sampled from the \textbf{JourneyDB} benchmark~\cite{sun2023journeydbbenchmarkgenerativeimage} and subsequently enhanced for quality and diversity using the Qwen2.5-3B-Instruct~\cite{qwen2.5} model.
+\ifdefined\aaaianonymous
+    \usepackage[submission]{aaai2026}  % Anonymous submission version
+\else
+    \usepackage{aaai2026}              % Camera-ready version
+\fi
+
+\usepackage{times}  % DO NOT CHANGE THIS
+\usepackage{helvet}  % DO NOT CHANGE THIS
+\usepackage{courier}  % DO NOT CHANGE THIS
+\usepackage[hyphens]{url}  % DO NOT CHANGE THIS
+\usepackage{graphicx} % DO NOT CHANGE THIS
+\urlstyle{rm} % DO NOT CHANGE THIS
+\def\UrlFont{\rm}  % DO NOT CHANGE THIS
+\usepackage{natbib}  % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\usepackage{caption} % DO NOT CHANGE THIS AND DO NOT ADD ANY OPTIONS TO IT
+\frenchspacing  % DO NOT CHANGE THIS
+\setlength{\pdfpagewidth}{8.5in} % DO NOT CHANGE THIS
+\setlength{\pdfpageheight}{11in} % DO NOT CHANGE THIS
+
+%
+% These are recommended to typeset algorithms but not required.
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{placeins}
+% \usepackage{cite}
+\usepackage{multirow}
+\usepackage{colortbl} % 导入 colortbl 包以添加颜色
+% \usepackage{xcolor}
+\usepackage{makecell}
+%
+% Keep the \pdfinfo as shown here. There's no need
+% for you to add the /Title and /Author tags.
+\pdfinfo{
+/TemplateVersion (2026.1)
+}
+\usepackage[utf8]{inputenc}
+
+\setcounter{secnumdepth}{2} %May be changed to 1 or 2 if section numbers are desired.
+
+% Title - conditionally set based on version
+\ifdefined\aaaianonymous
+    \title{Video-BLADE: Block-Sparse Attention Meets Step Distillation \\ for Efficient Video Generation}
+    \author{
+        Anonymous Submission
+    }
+    \affiliations{
+        Paper ID:
+    }
+\else
+    \title{Video-BLADE: Block-Sparse Attention Meets Step Distillation \\ for Efficient Video Generation}
+    % Add author info for camera-ready version
+    \title{Video-BLADE: Block-Sparse Attention Meets Step Distillation \\ for Efficient Video Generation}
+    % Add author info for camera-ready version
+    \author{
+      Youping~Gu$^{1}$\thanks{Equal contribution.} \;
+      XIAOLONG~LI$^{1}$\footnotemark[1] \;
+      Yuhao~Hu$^{2}$ \;
+      Bohan~Zhuang$^{1}$\thanks{Corresponding author. Email: bohan.zhuang @gmail.com}
+      \\[0.6em]
+      \normalsize
+      $^{1}$ZIP~Lab,Zhejiang~University  \quad
+      $^{2}$Huawei Central Media Technology Institute
+    }
+\fi
+
+% 告诉 checklist “我是在主文档里调用它”
+% \newcommand{\isChecklistMainFile}{}
+
+\begin{document}
+
+\maketitle
+
+%\begin{abstract}
+%Diffusion transformers have set the bar for high-quality video generation, yet their iterative denoising and the quadratic attention cost imposed by long sequences severely slow the inference. Two dominant acceleration strategies, \textit{step distillation} and \textit{sparse attention mechanism}, have been proposed individually to break this bottleneck. %However, step distillation typically blurs textures and introduces temporal flickers, while naive sparsity can permanently curtail the model’s expressive power. 
+%It is therefore crucial to efficiently integrate step distillation with sparse attention. However, training-free integration yields poor results, necessitating the introduction of training; yet training sparse attention independently based on the model after step distillation requires large amounts of high-quality video data, which is costly. 
+%The central challenge, therefore, is to fuse the two techniques so that they complement rather than undermine each other, delivering substantial speed‑ups without perceptible quality loss, and ideally, with quality gains. 
+%The core challenge is to make these two techniques complement each other effectively—enabling highly sparse attention under few sampling steps while maintaining quality and achieving significant speedups.
+%In this paper, we introduce \textbf{BLADE} (\underline{BL}ock‑sparse \underline{A}ttention with step \underline{D}istillation for \underline{E}fficient video generation), 
+%a novel co-design that can leverage both sparse attention mechanism  and step distillation. 
+%an efficient, data-free joint training paradigm with fast convergence.
+%Our core innovation is two-fold: (1) an Adaptive Block-Sparse Attention (ASA) mechanism that can dynamically and efficiently generates content-aware sparsity masks to focus computation on salient spatial-temporal features, and (2) a sparsity-aware step distillation paradigm built upon Trajectory Distribution Matching (TDM), integrating sparsity directly into the %training step distillation
+%process, rather than a post‑hoc compression step.
+%Thus, sparse attention mechanism becomes an integral part of distillation 
+%rather than a post‑hoc compression step, 
+%guiding the student model to learn robust representations under computational constraints.
+%We validate BLADE on text-to-video models like CogVideoX-5B and Wan2.1-1.3B. Experiments show that our ASA kernel achieves a 3.30$\times$ speedup over standard attention, when combined with 8-step distillation, contributing to a 14.10$\times$ end-to-end inference acceleration over a 50-step baseline.
+%More strikingly, our final model not only significantly accelerates inference over a 50-step baseline but also consistently improves its quality, that for CogVideoX-5B, boosting the VBench 2.0 score to 0.569 from the baseline's 0.534 and earning superior ratings in human evaluations.
+%\end{abstract}
+
+
+\begin{abstract}
+Diffusion transformers currently lead the field in high-quality video generation, but their slow iterative denoising process and prohibitive quadratic attention costs for long sequences create significant inference bottlenecks. While both step distillation and sparse attention mechanisms have shown promise as independent acceleration strategies, effectively combining these approaches presents critical challenges---training-free integration yields suboptimal results, while separately training sparse attention after step distillation requires prohibitively expensive high-quality video data. To overcome these limitations, we propose \textbf{BLADE} (\underline{BL}ock‑sparse \underline{A}ttention Meets step \underline{D}istillation for \underline{E}fficient video generation), an innovative data-free joint training framework that introduces: (1) an Adaptive Block-Sparse Attention (ASA) mechanism for dynamically generating content-aware sparsity masks to focus computation on salient spatiotemporal features, and (2) a sparsity-aware step distillation paradigm built upon Trajectory Distribution Matching (TDM) that directly incorporates sparsity into the distillation process rather than treating it as a separate compression step, with fast convergence. We validate BLADE on text-to-video models like CogVideoX-5B and Wan2.1-1.3B. Our framework demonstrates remarkable efficiency gains across different scales. On Wan2.1-1.3B, BLADE achieves a 14.10$\times$ end-to-end inference acceleration over a 50-step baseline. Moreover, on models such as CogVideoX-5B with short video sequence lengths, our framework delivers a robust 8.89$\times$ speedup. Crucially, the acceleration is accompanied by a consistent quality improvement. On the VBench-2.0 benchmark, BLADE boosts the score of CogVideoX-5B to 0.569 (from 0.534) and Wan2.1-1.3B to 0.570 (from 0.563), results that are further corroborated by superior ratings in human evaluations.
+\end{abstract}
+
+
+
+
+
+
+
+
+
+\section{Introduction}
+
+Diffusion models have emerged as the state-of-the-art for a wide array of generative tasks~\cite{dhariwal2021diffusionmodelsbeatgans}, achieving unprecedented quality in image synthesis~\cite{cao2024controllablegenerationtexttoimagediffusion,esser2024scalingrectifiedflowtransformers,labs2025flux1kontextflowmatching} and now pushing the frontier in the complex domain of video generation~\cite{blattmann2023alignlatentshighresolutionvideo,xing2024surveyvideodiffusionmodels}. By modeling generation as a gradual reversal of a noising process~\cite{ho2020denoisingdiffusionprobabilisticmodels}, these models can produce diverse and high-fidelity content. However, for diffusion transformers, this power comes at a severe computational cost~\cite{shen2025efficientdiffusionmodelssurvey}. The introduction of the temporal dimension dramatically inflates the complexity of the attention mechanism, which scales quadratically with sequence length~\cite{wan2025,yang2024cogvideox,kong2025hunyuanvideosystematicframeworklarge}. This, combined with the iterative nature of the denoising process, results in prohibitively slow inference speeds that hinder practical deployment.
+
+To mitigate this critical efficiency bottleneck, two primary research directions have gained prominence: reducing the number of inference steps via step distillation~\cite{song2023consistency,salimans2022progressivedistillationfastsampling,liu2024instaflowstephighqualitydiffusionbased,zheng2024trajectoryconsistencydistillationimproved,gu2023bootdatafreedistillationdenoising,goodfellow2014generativeadversarialnetworks,yin2024improved} and lowering the per-step cost via sparse attention~\cite{zhang2025fastvideogenerationsliding,yuan2024ditfastattnattentioncompressiondiffusion,zhang2025spargeattentionaccuratetrainingfreesparse,li2025radialattentiononlogn,xu2025xattentionblocksparseattention,dao2022flashattentionfastmemoryefficientexact}. However, effectively integrating these two powerful paradigms is non-trivial and presents a critical dilemma. A naive, training-free combination, where a pre-trained sparse attention mechanism is applied to a distilled model, yields suboptimal results because the distillation process is agnostic to sparse attention. Conversely, a sequential training pipeline that involves first performing step distillation and then fine-tuning the model for sparsity is equally impractical, as it re-introduces the need for prohibitively large and expensive high-quality video datasets, counteracting the key benefits of modern data-free distillation methods~\cite{gu2023bootdatafreedistillationdenoising,sauer2024fasthighresolutionimagesynthesis,luo2025tdm}.
+
+The challenge of designing an appropriate sparse attention mechanism is further exacerbated in the video domain. Many existing methods rely on static, content-agnostic sparsity patterns~\cite{zhang2025fastvideogenerationsliding,li2025radialattentiononlogn,xi2025sparsevideogenacceleratingvideo}. These fixed patterns, such as rigid local windows or pre-determined striding, fail to adapt to the dynamic and diverse spatiotemporal features of video content. Consequently, they often struggle to preserve important details and long-range dependencies, leading to significant quality degradation, especially at higher sparsity levels required for meaningful acceleration. In contrast, another line of work explores dynamically generated attention masks, which allow the sparsity pattern to adapt to content-specific structure. While dynamic masking methods such as VSA~\cite{zhang2025vsafastervideodiffusion} improve the trade-off between efficiency and fidelity, they are only applicable in training settings and impose strict requirements on the length of video token sequences. On the other hand, SpargeAttention~\cite{zhang2025spargeattentionaccuratetrainingfreesparse} supports training-free inference but cannot be trained and exhibits limited sparsity. These limitations on usage scenario and flexibility hinder broader adoption of dynamic sparse attention in real-world video generation tasks.
+
+
+This landscape highlights a clear need for a sparse attention mechanism that is computationally efficient, dynamically content-aware, and flexible enough to support arbitrary resolutions and both training-free and training-aware modes at high sparsity without sacrificing visual fidelity. To this end, we introduce \textbf{ASA}, a training-free sparse attention framework with dynamic token selection, capable of adapting to input content while maintaining high generation quality across various settings. For cases where training is permitted, we further present \textbf{ASA\_GT}, a distillation-based variant that leverages global token prediction to enable end-to-end training. Together, ASA and ASA\_GT offer a unified solution to both inference and training scenarios in efficient video generation.
+
+
+
+Overall, this paper argues that a truly effective solution requires moving beyond treating distillation and sparsity as separate, post-hoc optimizations. We introduce \textbf{BLADE} (\underline{BL}ock-sparse \underline{A}ttention Meets step \underline{D}istillation for \underline{E}fficient video generation), a novel framework that pioneers the \textbf{synergistic, data-free, and joint training} of dynamic sparsity and step distillation. Our approach directly incorporates sparsity-awareness into the distillation process, allowing the student model to learn a compact and efficient trajectory from the teacher, conditioned on a dynamic attention pattern.
+
+The main contributions of this work are as follows:
+\begin{itemize}
+\item We propose \textbf{BLADE}, a novel and \textbf{data-free joint training framework} that, for the first time, synergistically integrates an adaptive sparse attention mechanism directly into a sparsity-aware step distillation process, overcoming the limitations of prior sequential or training-free integration approaches.
+\item We introduce \textbf{Adaptive Block-Sparse Attention (ASA)}, a dynamic, content-aware, and hardware-friendly attention mechanism that generates sparsity masks on-the-fly to focus computation on salient features, outperforming existing static sparse attention methods.
+\item We demonstrate significant end-to-end inference acceleration on diverse models, achieving a \textbf{14.10$\times$} speedup on Wan2.1-1.3B and a robust \textbf{8.89$\times$} on the shorter-sequence CogVideoX-5B. Crucially, this acceleration is accompanied by a consistent \textbf{quality improvement}, with VBench-2.0 scores increasing for both Wan2.1-1.3B (0.563 $\to$ 0.570) and CogVideoX-5B (0.534 $\to$ 0.569).
+\end{itemize}
+
+\section{Related Work}
+\label{sec:related_work}
+
+\subsection{Video Generation with Diffusion Models}
+Recent years have witnessed remarkable progress in video generation, largely driven by the success of diffusion models~\cite{ho2020denoisingdiffusionprobabilisticmodels,song2021scorebasedgenerativemodelingstochastic,ma2025lattelatentdiffusiontransformer,cao2024controllablegenerationtexttoimagediffusion,he2023latentvideodiffusionmodels}. These models have become the de facto standard for synthesizing high-fidelity and temporally coherent video content, achieving state-of-the-art results on various benchmarks~\cite{huang2023vbench, zheng2025vbench2}.
+
+The operating principle of diffusion models is to learn the reversal of a fixed data corruption process. Specifically, a noisy sample $\mathbf{x}_t$ is generated by corrupting a clean sample $\mathbf{x}_0 \sim p_{\text{real}}$ using a simple formulation: $\mathbf{x}_t = \alpha_t \mathbf{x}_0 + \sigma_t \boldsymbol{\epsilon}$, where $\boldsymbol{\epsilon} \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$ is standard Gaussian noise. The positive scalars $\alpha_t$ and $\sigma_t$ are dictated by a noise schedule, which controls the signal-to-noise ratio at each timestep $t$~\cite{karras2022elucidatingdesignspacediffusionbased}.
+
+The model's task is to learn this reversal. A network, often termed a denoiser $\boldsymbol{\mu}_{\theta}(\mathbf{x}_t, t)$, is trained to predict the original clean sample $\mathbf{x}_0$ from its corrupted version $\mathbf{x}_t$. This learned denoiser provides an estimate of the score function~\cite{song2021scorebasedgenerativemodelingstochastic}:
+\begin{equation}
+\label{eq:score_matching}
+s_{\theta}(\mathbf{x}_t, t) = \nabla_{\mathbf{x}_t} \log p_{\text{real},t}(\mathbf{x}_t) \approx - \frac{\mathbf{x}_t - \alpha_t \boldsymbol{\mu}_{\theta}(\mathbf{x}_t, t)}{\sigma_t^2}.
+\end{equation}
+Generation is then achieved by starting with pure noise $\mathbf{x}_T \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$ and iteratively applying the learned denoising function to reverse the corruption process, step-by-step, until a clean sample $\mathbf{x}_0$ is obtained.
+\subsection{Acceleration via Step Distillation}
+Step distillation has emerged as a primary strategy for accelerating diffusion models~\cite{song2023consistency,salimans2022progressivedistillationfastsampling,liu2024instaflowstephighqualitydiffusionbased,zheng2024trajectoryconsistencydistillationimproved,gu2023bootdatafreedistillationdenoising,goodfellow2014generativeadversarialnetworks}. The goal is to transfer the knowledge from a slow ``teacher" model (e.g., a 50-step sampler) to a faster ``student" model that can generate comparable results in very few steps (e.g., 1--8 steps). Early methods like Progressive Distillation~\cite{salimans2022progressivedistillationfastsampling,luhman2021knowledgedistillationiterativegenerative} iteratively halve the number of sampling steps. Distillation strategies can be broadly categorized into output distillation, which trains the student to match the final output of a multi-step teacher process, and trajectory distillation~\cite{luhman2021knowledgedistillationiterativegenerative,song2023consistency}, which guides the student to follow the teacher's intermediate generation path. Trajectory Distribution Matching (TDM) represents a recent and sophisticated advancement in this area~\cite{luo2025tdm}. TDM unifies the concepts of distribution matching and trajectory matching. Instead of enforcing a strict instance-level match of the trajectory, it aligns the \textit{distribution} of the student's intermediate samples with the teacher's corresponding diffused distributions at each step. A key advantage of TDM is that it is a \textbf{data-free} method; it does not require access to the original, often proprietary, training dataset, relying only on the pre-trained teacher model to generate guidance signals. This makes it a highly practical and versatile distillation framework, which we adopt as the foundation for our work.
+
+\subsection{Video-Specific Sparse Attention}
+
+
+
+Several promising approaches have been proposed to address this challenge, each with distinct mechanisms and trade-offs. Early methods such as STA~\cite{zhang2025fastvideogenerationsliding} and Radial Attention~\cite{li2025radialattentiononlogn} primarily utilize static attention masks. STA employs a fixed local window, a design choice that makes it most effective for specific input dimensions, while Radial Attention proposes a heuristic whose resulting sparsity is less pronounced on shorter sequences, limiting its adaptability. To introduce more dynamism, SVG~\cite{xi2025sparsevideogenacceleratingvideo} selects between two pre-defined masks, a binary choice that offers limited granularity and may create a trade-off between quality and sparsity. 
+Other methods like SpargeAttention~\cite{zhang2025spargeattentionaccuratetrainingfreesparse} also shows potential in training-free scenarios. However, it is not applicable to training, and its sparsity level must be kept moderately low to preserve video quality.
+VSA~\cite{zhang2025vsafastervideodiffusion} introduces training and offers finer-grained control via fixed attention cubes, a design that influences the range of applicable resolutions. To bridge these varied trade-offs, we propose Adaptive Block-Sparse Attention (ASA), a dynamic, content-aware mechanism that generates hardware-friendly sparsity masks on-the-fly, providing a unified solution for both training-free and distillation-based scenarios.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.5\textwidth]{BLADE(2).png} % The image spans the full text width for better visibility.
+\caption{The training mechanism of Video-BLADE within a single distillation interval $[t_{i-1}, t_i)$. The Sparse Generator ($G_{\theta}$) denoises the input $\mathbf{x}_{t_i}$ to produce the sample $\mathbf{x}_{t_{i-1}}$. Crucially, this output is then re-corrupted with Gaussian noise to create an intermediate sample $\mathbf{x}_{t_j}$. A dedicated \textbf{Fake Score} model evaluates this re-noised sample. Its output is contrasted with the score from the \textbf{Real Score} model (which is the pre-trained teacher model) to compute the Distribution Matching Loss ($\nabla_{\theta} D_{KL}$). This loss directly updates the student generator, forcing it to align its generation trajectory with the teacher's at a distributional level.}
+\label{fig:workflow}
+\end{figure}
+\section{Method}
+
+\subsection{Overall Architecture}
+BLADE is a holistic framework for accelerating video diffusion models by synergistically integrating dynamic sparsity into a powerful step distillation process. As illustrated in Figure \ref{fig:workflow}, our architecture is based on a student-teacher paradigm. The teacher, $f_{\phi}$, is a pre-trained, high-quality but computationally expensive multi-step diffusion model. The student, $G_{\theta}$, initially shares the same Transformer-based (DiT)~\cite{peebles2023scalablediffusionmodelstransformers} architecture and weights as the teacher. Our key innovation, designed to enable few-step generation, is the replacement of the standard self-attention layers within the student with our proposed Adaptive Block-Sparse Attention (ASA) mechanism.
+The training process follows the Trajectory Distribution Matching (TDM)~\cite{luo2025tdm} paradigm. In each iteration, the sparse student model $G_{\theta}$ generates an intermediate trajectory. This trajectory is then guided to match the distribution of the teacher's trajectory via a data-free score distillation loss. This ensures the student learns to produce high-quality outputs while operating under the computational constraints imposed by ASA.
+
+\subsection{Preliminaries: Trajectory Distribution Matching (TDM)}
+Trajectory Distribution Matching (TDM)~\cite{luo2025tdm} is an advanced distillation framework designed to create efficient, few-step diffusion models. Its core idea is to align the entire generation trajectory of a student model with that of a teacher model at the distribution level, rather than requiring an exact instance-level match. This is operationalized through a data-free score distillation process that relies on three key components:
+\begin{enumerate}
+\item The pre-trained \textbf{teacher model} $f_{\phi}$, which provides the real data score $s_{\phi}$.
+\item The \textbf{student generator} $G_{\theta}$, which learns to produce high-fidelity samples in a few steps.
+\item A \textbf{fake score model} $f_{\psi}$, which provides the fake score $s_{\psi}$ by approximating the student's intractable sample score.
+\end{enumerate}
+
+The training process involves two intertwined objectives, one for the fake score model and one for the student generator.
+
+\paragraph{Training the fake score model ($f_{\psi}$).}
+The score distillation process requires the student model's score function $\nabla_{\mathbf{x}_j} \log p_{\theta, j|t_i}(\mathbf{x}_{j})$, which is intractable. TDM resolves this by introducing a fake score model, $f_{\psi}$, a neural network trained concurrently to approximate the student's score. To ensure this approximation is accurate, 
+the fake score model $f_{\psi}$ is trained using a denoising objective as follows:
+\begin{equation}
+\label{eq:fake_score_loss}
+\mathcal{L}(\psi) = \sum_{i=0}^{K-1} \mathbb{E}_{p_{\theta,t_i}(\mathbf{x}_{t_i})} \mathbb{E}_{q(\mathbf{x}_j|\hat{\mathbf{x}}_{t_i})} \| f_{\psi}(\mathbf{x}_j, j) - \hat{\mathbf{x}}_{t_i} \|^2_2,
+\end{equation}
+where the clean target $\hat{\mathbf{x}}_{t_i}$ is first obtained by the student model by denoising an input $\mathbf{x}_{t_i}$. A noisy sample $\mathbf{x}_{j}$ is then created by perturbing this target, and the model learns to predict the clean sample $\hat{\mathbf{x}}_{t_i}$ from this noisy input $\mathbf{x}_{j}$.
+\paragraph{Training the student generator ($G_{\theta}$).}
+With access to both the teacher's score $f_{\phi}$ and the student's own score estimate $f_{\psi}$, the student generator $G_{\theta}$ can be trained. The objective is to minimize the KL divergence between the student's trajectory distribution and the teacher's trajectory distribution. This alignment is performed across $K$ stages of the diffusion process, ensuring that the student learns to follow the teacher's path efficiently. The core distillation loss is:
+\begin{equation}
+\label{eq:distillation_loss}
+\mathcal{L}(\theta) = \sum_{i=0}^{K-1} \lambda_i D_{\text{KL}}\left( p_{\theta, t_i}(\mathbf{x}_{t_i}) \Vert p_{\phi, t_i}(\mathbf{x}_{t_i}) \right).
+\end{equation}
+In practice, minimizing this KL divergence is achieved by matching the scores. The gradient of this objective is computed by replacing the student's intractable true score, $\nabla_{x_j} \log p_{\theta, j|t_i}(\mathbf{x}_{j})$, with the output of the fake score model, $s_{\psi}$. This results in the following gradient approximation:
+\begin{align}
+\label{eq:distillation_gradient}
+\nabla_{\theta} \mathcal{L}(\theta) &= \sum_{i=0}^{K-1} \sum_{j=t_i}^{t_{i+1}} \lambda_{j} [\nabla_{\mathbf{x}_j} \log p_{\theta, j|t_i}(\mathbf{x}_{j}) - s_{\phi}(\mathbf{x}_{j}, j)] \frac{\partial \mathbf{x}_{t_i}}{\partial \theta} \\
+&\approx \sum_{i=0}^{K-1} \sum_{j=t_i}^{t_{i+1}} \lambda_{j} [s_{\psi}(\mathbf{x}_{j}, j) - s_{\phi}(\mathbf{x}_{j}, j)] \frac{\partial \mathbf{x}_{t_i}}{\partial \theta}. \nonumber
+\end{align}
+Following the TDM framework~\cite{luo2025tdm}, this process is made both practical and memory-efficient through two key implementation choices. First, we ensure the distillation intervals $[t_i, t_{i+1})$ are non-overlapping. This design allows a \textbf{single fake score model} $f_{\psi}$ to be sufficient for all stages, as the timestep naturally separates the different underlying sample distributions. Second, to conserve GPU memory, backpropagation through the student generator is constrained to only \textbf{one ODE step} at a time.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=1\textwidth]{ASAv3.png} % Assuming figure2.png is the mask generation diagram
+\caption{The two-stage process for Adaptive Block-Sparse Attention mask generation. (1) The \textit{Efficient Attention Prober} samples a few representative tokens (e.g., $k=16$) from each block to compute a low-cost max-pooled attention matrix $P$. (2) The \textit{Threshold-based Mask Generator} sorts the scores in $P$ and selects the top blocks that contain a specified threshold (e.g., 95\%), producing the final binary mask $M$. To enrich the context for training, we augment the key matrix \(K\) by concatenating it with a pooled version: \(K = \text{Concat}(K, \text{MeanPool}_n(K))\), where \(\text{MeanPool}_n(K)\) denotes mean pooling over a window of size \(n\). During attention computation, the original \(K\) region uses the binary block mask \(M\), while the pooled region receives a fixed additive mask of \(\ln n\), softly guiding attention without disrupting sparsity.
+}
+
+\label{fig:mask_generation}
+\end{figure*}
+% \FloatBarrier
+\subsection{Adaptive Block-Sparse Attention (ASA)}
+%The core technical contribution 
+A core design of our work is the Adaptive Block-Sparse Attention (ASA) mechanism, which dynamically prunes the attention matrix to focus computation on salient spatio-temporal interactions. This content-aware approach overcomes the limitations of static masks used in prior work. The process involves a preparatory step followed by a dynamic mask generation stage.
+
+\textbf{Preprocessing: Locality-preserving token rearrangement.}
+The input matrix $Q$, $K$, and $V$, representing a flattened sequence of video tokens, are first restructured into blocks. A critical preliminary step is rearranging the tokens to preserve their inherent spatial locality, which is often disrupted by standard raster-scan tokenization. To this end, we employ a Gilbert space-filling curve~\cite{zhang2025spargeattentionaccuratetrainingfreesparse} to reorder the tokens before blocking. This ensures that the resulting blocks are more semantically coherent, containing spatially contiguous information, which significantly enhances the effectiveness of the subsequent threshold-based pruning.
+
+\textbf{Step 1: Efficient block importance estimation.}
+Conceptually, one could compute the full, dense attention matrix $P = \text{softmax}(QK^\top / \sqrt{d_k})$, partition it into blocks of size $b \times b$, and then apply max-pooling over each block. This would yield a downsampled importance matrix, $P_{\text{imp}}$, where each element signifies the importance of the corresponding block. A sparse mask could then be generated by applying a threshold to each row of $P_{\text{imp}}$, allowing each query block to focus only on the most salient key-value blocks. However, the initial computation of the full matrix $P$ makes this method impractical for achieving actual acceleration.
+
+To overcome this limitation, we propose an efficient online approximation. Instead of the full matrix, we sample $k$ representative tokens ($k < b$) from each block of $Q$ and $K$ to form smaller matrix, $Q_s$ and $K_s$. We then compute a much smaller, low-resolution attention map, $P_{\text{approx}}$, from these sampled tokens. The block importance matrix $P_{\text{imp}}$ is derived from this approximate map. This approach reduces the complexity of mask generation from $\mathcal{O}(N^2)$ to approximately $\mathcal{O}(N^2 \cdot (k/b)^2)$, where $N$ is the sequence length. This makes online mask generation feasible. Our theoretical results demonstrate the stability of this approximation with appropriate $k$ and $b$, showing that it yields masks that closely approximate vanilla selections based on the full attention map while significantly reducing computational cost. See the Appendix for detailed analysis and proofs \cite{oneill2023distributionorderstatisticssampling}.
+
+
+\textbf{Step 2.1: Sparse mask construction.}
+Once the block importance matrix $P_{\text{imp}}$ is obtained, we generate the final sparse attention mask based on a threshold-based masking strategy. %by applying one of two selection strategies designed to retain important attention paths while reducing computation:
+%\textit{ Threshold-based masking.} 
+Specifically, we sort each row of $P_{\text{imp}}$ in descending order and include the minimal number of key blocks such that their cumulative attention scores exceed a specified threshold (e.g., 90\%). This threshold-based dynamic pruning preserves the most salient attention paths while skipping less informative blocks, offering a flexible trade-off between accuracy and efficiency.
+
+The resulting binary mask is then used to restrict the computation of attention during both training and inference, ensuring that the majority of computational resources are focused on the most relevant interactions.
+We provide the pseudocode of ASA in Algorithm \ref{alg:asa_sampling}. 
+\begin{algorithm}[H]
+\caption{ASA Mask Generation}
+\label{alg:asa_sampling}
+\begin{algorithmic}[1]
+\REQUIRE $Q, K \in \mathbb{R}^{N \times d}$, block size $b$, sample size $k$, threshold $\tau$
+\STATE Rearrange tokens using Gilbert curve
+\STATE Partition $Q, K$ into $N_b = N / b$ blocks
+\STATE Randomly sample $k$ tokens from each block to get $Q_s, K_s \in \mathbb{R}^{N_k \times d}$
+\STATE Compute attention: $\widetilde{P} = \text{softmax}(Q_s K_s^\top / \sqrt{d})$
+\STATE MaxPool over $k \times k$ blocks to get $P_{\text{imp}} \in \mathbb{R}^{N_b \times N_b}$
+\FOR{each row $i$ in $P_{\text{imp}}$}
+    \STATE $\tilde{P}_{\text{imp}}(i,j) \gets \dfrac{P_{\text{imp}}(i,j)}{\sum_k P_{\text{imp}}(i,k)}$
+    \STATE Sort $\tilde{P}_{\text{imp}}[i,:]$ descending $\rightarrow s$
+    \STATE Find smallest $m$ such that $\sum_{j=1}^{m} s_j \geq \tau$, then clamp $m$ within the range defined by minimum and maximum retention ratios
+    \STATE Set $M[i,j] = 1$ for top $m$ indices, others $= 0$
+\ENDFOR
+\RETURN Binary mask $M$
+\end{algorithmic}
+\end{algorithm}
+
+\textbf{Step 2.2: Computation. }
+Based on this mask generation technique, we define two variants of our mechanism:
+
+\textit{1) Standard ASA (Training-Free):} In its primary form, the generated binary sparse mask $M$ is directly integrated with a block-sparse attention kernel. This variant can be applied to pre-trained models without any retraining, offering a direct inference speed-up by focusing computation on fine-grained, salient information.
+
+\textit{2) ASA with Global Tokens (for Distillation):} To mitigate potential global information loss at high sparsity ratios, we introduce an enhanced variant. We augment the Key ($K$) and Value ($V$) matrix by creating a set of  \textbf{``global tokens''}.  These are generated by applying mean pooling over a window of size $n$, reducing the sequence length to $1/n$ of the original lengths of $K$ and $V$. The augmented matrix are formed as $K_{\text{aug}} = \text{Concat}(K, \text{MeanPool}_n(K))$ (and similarly for $V$). During attention computation, a query's interaction with the original $K$ region is governed by the binary sparse mask $M$, preserving fine-grained details. For the augmented "global tokens" region, we apply a fixed additive mask of $\ln(n)$ to the pre-softmax scores.This bias compensates for the averaging effect of mean pooling, ensuring that each global token contributes attention as if it represents the full importance of its $n$ constituent fine-grained tokens. This softly guides every query to maintain awareness of the global context, preventing catastrophic information loss when most blocks are pruned.
+
+Throughout this paper, we refer to the standard implementation as \textbf{ASA} and the augmented version as \textbf{ASA with Global Tokens (ASA\_GT in short)}.
+
+\subsection{Sparsity-Aware Distillation}
+A cornerstone of the Video-BLADE framework is the principle of sparsity-aware distillation. Unlike previous approaches that apply sparsity as a post-training compression step, we integrate ASA directly into the TDM training loop. At every training iteration, the student model $G_{\theta}$ generates its trajectory \textit{using the ASA mechanism}. The distribution matching loss then updates the student's weights to improve its output quality \textit{given these dynamic sparsity constraints}.
+
+This co-design strongly regularizes the model, forcing it to learn a robust, semantic representation that often yields superior perceptual quality.
+\begin{table*}[t]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\caption{Video Quality Evaluation on VBench-2.0.}
+
+\label{tab:main_results}
+
+
+\begin{tabular}{llcccccccc}
+\toprule
+Model & Method & Sparsity & Total\_score & Creativity & Commonsense & Controllability & Human Fidelity & Physics& Speedup\\
+\midrule
+\multirow[]{3}{*}{CogvideoX-5B} 
+& Baseline & - & 0.534 & 0.458 & \textbf{0.523} & 0.341 & \underline{0.808} & 0.539 &1$\times$\\
+& FA2 & - & \underline{0.539} & 0.458 & 0.498 & \underline{0.354} & \textbf{0.813} & \underline{0.570} & 7.93$\times$ \\ 
+& ASA\_GT(ours) & 0.82 & \textbf{0.569} & \textbf{0.546} & \underline{0.514} & \textbf{0.367} & 0.802 & \textbf{0.618}&\textbf{8.89$\times$} \\ 
+
+
+\midrule
+\multirow[]{4}{*}{Wan2.1-1.3B} 
+& Baseline & - & 0.563 & \underline{0.508} & \textbf{0.549} & \textbf{0.338} & 0.820 & 0.600&1$\times$ \\
+& FA2 & - & \textbf{0.580} & \textbf{0.631} & 0.485 & 0.311 & 0.841 & \textbf{0.631} &9.37$\times$\\
+& STA & 0.74 & 0.528 & 0.504 & 0.471 & 0.265 & \underline{0.855} & 0.543 &10.53$\times$\\
+& ASA\_GT(ours) & 0.8 & \underline{0.570} & 0.472 & \underline{0.532} & \underline{0.312} & \textbf{0.918} & \underline{0.617}&\textbf{14.10$\times$} \\ 
+
+
+\bottomrule
+\end{tabular}
+
+\par
+\smallskip
+% \textit{Method abbreviations: ASA\_GT: Distillation\_infer\_with\_ASA\_GT,
+% ASA: Distillation\_infer\_with\_ASA,STA: Distillation\_infer\_with\_STA, FA2: Distillation\_infer\_with\_FlashAttention2, Baseline: official 50steps model baseline.\\
+\textit{Note:} \textbf{Baseline refers to the official 50 steps baseline. All methods except the Baseline are distilled to 8 steps using TDM.}
+\end{table*}
+
+
+\section{Experiment}
+\subsection{Experimental Setup}
+\textbf{Models.} We evaluate \textbf{BLADE} on two text-to-video diffusion models: CogVideoX-5B~\cite{hong2022cogvideo} and Wan2.1-1.3B~\cite{wan2025}. These models represent different architectures and scales, allowing us to test the generalizability of our approach.
+
+\noindent\textbf{Dataset.} Our training process is guided by a dataset of 10,000 text prompts. These prompts were sampled from the JourneyDB benchmark~\cite{sun2023journeydbbenchmarkgenerativeimage} and subsequently enhanced for quality and diversity using the Qwen2.5-3B-Instruct~\cite{qwen2.5} model.
+
+\noindent\textbf{Metrics.} We use a suite of standard metrics to evaluate performance:VBench-1.0~\cite{huang2023vbench}, VBench-2.0~\cite{zheng2025vbench2}, SSIM \& PSNR~\cite{5596999}, Human Evaluation.
+
+\noindent\textbf{Implementation details.} Unless otherwise specified, we use a block size $b=128$, $k=16$ sampled tokens per block for the attention prober. Distillation is typically run for 250-500 iterations. Experiments on CogVideoX-5B and Wan2.1-1.3B were conducted on a cluster of 8 A800(80GB) GPUs.
+
+\noindent\textbf{Compared methods.} ASA\_GT, ASA,  STA~\cite{zhang2025fastvideogenerationsliding}, and RaA respectively denote using our adaptive attention, its training-free variant, and the Sliding Tile Attention~\cite{zhang2025fastvideogenerationsliding} Radial Attention\cite{li2025radialattentiononlogn}. FA2 refers to FlashAttention-2~\cite{dao2024flashattention}.
+
+
+
+
+\subsection{Main Results: Efficiency and Quality}
+Our experiments demonstrate that Video-BLADE achieves significant acceleration without compromising, and often improving, generation quality.
+
+\noindent\textbf{Quality Analysis.}
+Table~\ref{tab:main_results} presents the VBench-2.0 benchmark results for CogVideoX-5B and Wan2.1-1.3B across several methods, including our proposed ASA\_GT, the sparse baseline STA, FA2, and the 50-step dense baseline.
+
+For \textit{CogVideoX-5B}, ASA\_GT delivers consistent and comprehensive improvements across all major quality dimensions. It achieves the highest overall VBench-2.0 score (0.569), outperforming both the 50-step baseline and FA2, and leads in Creativity, Controllability, and Physics—all key for generating plausible and engaging video content. Notably, ASA\_GT achieves this performance using only 8 decoding steps over a short 17k-token sequence, resulting in an \textbf{8.89$\times$ speedup} while simultaneously improving generation quality. These results demonstrate that even with extremely constrained sequence lengths, ASA\_GT achieves robust generation quality.
+
+For \textit{Wan2.1-1.3B}, ASA\_GT continues to show clear advantages. It achieves a strong VBench-2.0 score (0.570), the highest Human Fidelity (0.918), and strong Physics performance, all while operating at just \textbf{7.09\%} of the original inference time (14.10× speedup). Compared to STA, which shares similar sparsity, ASA\_GT performs significantly better in almost all metrics. Although FA2 slightly outperforms ASA\_GT in total score, its performance on controllability is weaker and comes at a higher computational cost. A gallery-style visual comparison, showcasing video samples across diverse models and inference strategies, is presented in the Appendix.
+
+An intriguing observation from our results is that BLADE, despite its high sparsity and few inference steps, can surpass the quality of the 50-step dense baseline. We attribute this phenomenon to a regularization effect induced by our joint training framework. The long, iterative trajectory of the 50-step teacher can sometimes accumulate numerical errors or overfit to noisy, less coherent details. In contrast, our sparsity-aware distillation compels the student model to learn a more direct and stable generation path (a principle that echoes findings in prior works like DMD2~\cite{yin2024improved}), forcing it to capture the most essential semantics while implicitly filtering out the ``detours'' and noise from the teacher's process. The adaptive sparsity further aids this by focusing computation only on the most salient features. We provide a visual corroboration of this effect with attention map analyses in the Appendix. The resulting model is therefore not merely a faster approximation but can be a more \textbf{robust and coherent generator}. We evaluate our models on VBench-2.0, which places greater emphasis on semantic faithfulness—assessing how well the generated videos preserve high-level meaning rather than just pixel-wise accuracy. This aligns closely with the strengths of our approach.
+
+These findings validate that our ASA\_GT generalizes well across model scales and video lengths, and achieves a strong balance between efficiency and perceptual quality through sparsity-aware distillation and global context integration.
+
+
+\begin{table}[ht]
+\centering
+\caption{Efficiency analysis on Wan2.1-1.3B (test on an H20).}
+\label{tab:efficiency}
+\small
+\begin{tabular}{lccc}
+\toprule
+\textbf{Metric} & \textbf{FA2-50} & \textbf{FA2-8} & \textbf{ASA-8 (Ours)} \\
+\midrule
+Kernel Time (ms) & 73.25 & 73.25 & \textbf{22.21} \\
+Kernel Speedup & 1.00$\times$ & 1.00$\times$ & \textbf{3.30$\times$} \\
+E2E Time (s) & 338.41 & 36.11 & \textbf{24.00} \\
+E2E Speedup & 1.00$\times$ & 9.37$\times$ & \textbf{14.10$\times$} \\
+\bottomrule
+\end{tabular}
+
+\footnotesize\textit{Note:} The number suffix (e.g., FA2-50 or FA2-8) indicates the number of inference steps used in each model.
+\end{table}
+
+\begin{figure*}[ht]
+\centering
+\setlength{\tabcolsep}{2pt}  % 设置列间距
+\begin{tabular}{cccc}  % 定义四列，水平居中
+\toprule
+\textbf{FA2} & \textbf{ASA (Ours)} & \textbf{STA} & \textbf{SVG} \\
+\midrule
+\includegraphics[width=0.24\textwidth]{baseline/frame_0.jpg} &
+\includegraphics[width=0.24\textwidth]{ASA/frame_0.jpg} &
+\includegraphics[width=0.24\textwidth]{STA/frame_0.jpg} &
+\includegraphics[width=0.24\textwidth]{SVG/frame_0.jpg} \\
+\includegraphics[width=0.24\textwidth]{baseline/frame_40.jpg} &
+\includegraphics[width=0.24\textwidth]{ASA/frame_40.jpg} &
+\includegraphics[width=0.24\textwidth]{STA/frame_40.jpg} &
+\includegraphics[width=0.24\textwidth]{SVG/frame_40.jpg} \\
+\includegraphics[width=0.24\textwidth]{baseline/frame_80.jpg} &
+\includegraphics[width=0.24\textwidth]{ASA/frame_80.jpg} &
+\includegraphics[width=0.24\textwidth]{STA/frame_80.jpg} &
+\includegraphics[width=0.24\textwidth]{SVG/frame_80.jpg} \\
+\bottomrule
+\end{tabular}
+\caption{Comparison of generated videos at frame 0,40,80 for the prompt \textit{``A tranquil tableau of bedroom"}. Each row shows the same frame index across 4 methods. All videos are generated using an 8-step sampling method.}
+
+\label{fig:SSIM_compare}
+\end{figure*}
+\noindent\textbf{Efficiency analysis.}
+At the kernel level, our ASA implementation achieves a \textbf{3.30$\times$} speedup over the standard dense attention used in the 8-step FA2 baseline (22.21 ms vs. 73.25 ms), benefiting from an effective sparsity rate of 0.798. This low-level gain directly translates to a substantial end-to-end acceleration: our ASA-based model completes generation in \textbf{24.00 seconds}, compared to \textbf{36.11 seconds} for its dense counterpart—yielding a \textbf{1.504$\times$} E2E speedup.
+
+Notably, while the kernel speedup is more than 3$\times$, the E2E gain is sub-linear. This suggests that attention is no longer the dominant bottleneck in the distilled model; instead, other operations (e.g.,the VAE encoder/decoder and non-attention layers within the transformer) begin to dominate the runtime. This shift validates the effectiveness of our targeted kernel optimization in minimizing attention overhead within modern diffusion pipelines.
+
+
+
+
+
+\subsection{Comparison of Sparse Attention Mechanisms} 
+
+\begin{table}[h]
+\centering
+\caption{Comparison of training-free sparse attention methods on \textbf{Wan2.1-1.3B (8-step distilled model)}. Higher is better for both metrics. Sparse Inference: first 2 steps use FA2; subsequent steps use sparse attention.}
+\label{tab:ablation_attn}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Method} & \textbf{Sparsity} & \textbf{PSNR} & \textbf{SSIM} \\
+\midrule
+STA & 0.74 & 16.72 & 0.6190 \\
+SVG & 0.75 & 16.68 & 0.6390 \\
+ASA (Ours) & 0.75 & \textbf{19.55} & \textbf{0.7433} \\
+\midrule
+RaA & 0.50 & 22.07 & 0.8191 \\
+ASA (Ours) & 0.50 & \textbf{22.20} & \textbf{0.8290} \\
+\bottomrule
+\end{tabular}
+%\footnotesize\textit{Note:} 
+%SVG denotes Sparse-VideoGen, and RaA denotes Radial-Attention\cite{li2025radialattentiononlogn}.
+\end{table}
+To isolate the performance of the ASA mechanism itself, we compare it against other sparse attention methods in a training-free inference setting on Wan2.1-1.3B. Table \ref{tab:ablation_attn} shows that at a comparable sparsity level of 0.75, ASA significantly outperforms STA and SVG in both PSNR and SSIM, establishing its superiority as a dynamic attention mechanism. Videos sampled by different methods are shown in Figure~\ref{fig:SSIM_compare}.
+\textbf{Further ablation studies, including human evaluation results, are provided in the Appendix.}
+
+
+\section{Conclusion and Future Work}
+In this paper, we introduced \textbf{BLADE}, a novel framework that effectively addresses the critical efficiency challenge in video diffusion models. By synergistically co-designing a dynamic, content-aware Adaptive Block-Sparse Attention (ASA) mechanism with a data-free Trajectory Distribution Matching (TDM) distillation process, our method achieves significant inference acceleration without sacrificing generation quality. In fact, our results show that by making the model sparsity-aware during training, we can often achieve superior visual quality and intrinsic faithfulness~\cite{zheng2025vbench2} compared to both the original multi-step teacher and a densely distilled student model.
+
+Our contributions are validated through extensive experiments on various video models, demonstrating marked improvements in kernel-level efficiency, end-to-end inference speed, and generation quality as measured by both automated benchmarks (VBench-2.0) and human evaluations.
+
+\noindent\textbf{Limitations and future work.} While Video-BLADE exhibits strong performance, we acknowledge several limitations that point to promising directions for future research. First, our current experiments are limited to video sequences of moderate length. Extending and validating the ASA mechanism for generating minute-long videos with hundreds of thousands of tokens remains an important next step. Additionally, our current ASA kernel is implemented in Triton for simplicity, which prevents it from fully realizing the theoretical speedup. In future work, we plan to develop a more optimized CUDA implementation to better leverage the efficiency potential of ASA. These directions underscore the importance of evaluating ASA in more demanding settings and exploring further architectural enhancements. Lastly, the idea of sparsity-aware training as a form of regularization shows promise and could be extended to other generative domains beyond video synthesis.
+
+
+
+
+
+% --- Bibliography ---
+% NOTE: A.bib file should be created and named 'aaai2026.bib'
+% The following are example entries.
+\bibliography{aaai2026}
+
+% \input{ReproducibilityChecklist}
+
+\end{document}
+
