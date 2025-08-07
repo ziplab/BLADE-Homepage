@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-这是Video-BLADE学术论文的专业主页网站，是一个纯静态HTML/CSS/JavaScript网站，用于展示ICLR 2025提交的研究工作。项目采用现代化的响应式设计，包含论文摘要、方法介绍、实验结果展示、图片画廊等功能。
+这是Video-BLADE学术论文的专业主页网站，是一个纯静态HTML/CSS/JavaScript网站，用于展示ICLR 2025提交的研究工作。项目采用现代化的响应式设计，包含论文摘要、方法介绍、算法流程图、实验结果展示、视频对比演示、图片画廊等完整功能。
 
 ## 开发和测试命令
 
@@ -32,8 +32,9 @@ homepage/
 ├── js/
 │   ├── main.js        # 主要功能：导航、滚动、复制、动画、标签页
 │   └── gallery.js     # 图片画廊：lightbox、懒加载、键盘导航
-├── images/            # 图片资源（PNG/JPG）
-├── videos/            # 视频资源（MP4）
+├── images/            # 图片资源：算法图、表格、样本（PNG/JPG）
+├── videos/            # 精选视频资源：20个对比演示视频（MP4）
+├── All_videos/        # 完整视频库（不直接用于网站）
 ├── assets/            # 其他资源和文档
 └── test.html          # 功能测试页面
 ```
@@ -52,8 +53,9 @@ homepage/
 
 #### 3. 页面结构
 - **单页面应用**: 所有内容在index.html中，使用锚点导航
-- **主要sections**: hero, abstract, contributions, method, results, gallery, citation
+- **主要sections**: hero, abstract, contributions, method, results, videos, gallery, citation
 - **导航系统**: 固定导航栏，平滑滚动到对应section
+- **标签页系统**: Method、Results、Videos、Gallery都采用标签页切换界面
 
 ## 开发规范
 
@@ -79,13 +81,40 @@ homepage/
 - CSS和JavaScript按功能分离
 - 使用现代浏览器特性
 - 渐进式增强设计
+- 视频懒加载和预载元数据优化
+
+## 主要功能特性
+
+### 1. Method Section (算法展示)
+- **标签页界面**: Overall Framework 和 ASA Mechanism
+- **算法图展示**: method_overview.png 和 ASAv3.png
+- **技术详解**: 每个算法图都配有详细说明
+
+### 2. Results Section (实验结果)
+- **标签页界面**: Main Results、Ablation Study、Analysis
+- **论文表格**: Table1.png, Table2.png, Table3.png
+- **性能图表**: performance_chart.png 和 量化分析
+
+### 3. Video Demonstrations (视频演示)
+- **模型对比**: CogVideoX-5B vs WanX 2.1
+- **场景展示**: 每个模型各5个代表性场景
+- **效果对比**: Baseline (50 steps) vs BLADE (8 steps)
+- **视频列表**:
+  - CogVideoX: 帮助捡书、吃意大利面、红球弹跳、火箭环绕、宝石变亮
+  - WanX: 开门、泰姬陵环绕、豹子、乒乓球、鸟屋环绕
+
+### 4. Gallery Section (视觉结果)
+- **简化界面**: Quality Comparisons 和 Generated Samples
+- **移除**: Attention Visualization（按用户要求）
+- **增强描述**: 每个标签页都有说明文字
 
 ## 常见修改任务
 
 ### 更新内容
 - 修改`index.html`中的论文信息、作者、摘要等
 - 替换`images/`中的图片文件
-- 更新`videos/`中的视频文件
+- 更新`videos/`中的视频文件（注意文件命名规范）
+- 从`All_videos/`选择新的对比视频时，遵循现有命名规范
 
 ### 样式调整
 - 修改`css/style.css`中的CSS变量来改变主题颜色
