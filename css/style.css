@@ -551,10 +551,59 @@ a:hover {
 /* ==========================================
    Results Section
    ========================================== */
+.results-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.results-tabs .tab-btn {
+    background: none;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-medium);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+}
+
+.results-tabs .tab-btn:hover {
+    color: var(--primary-color);
+}
+
+.results-tabs .tab-btn.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+.results-content {
+    margin-top: 2rem;
+}
+
+.results-content .tab-content {
+    display: none;
+}
+
+.results-content .tab-content.active {
+    display: block;
+}
+
 .results-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
+}
+
+.result-section.full-width {
+    grid-column: 1 / -1;
+}
+
+.table-image {
+    text-align: center;
 }
 
 .result-section h3 {

@@ -208,56 +208,66 @@
         <div class="container">
             <h2 class="section-title">Experimental Results</h2>
             
-            <div class="results-grid">
-                <div class="result-section">
-                    <h3>Performance Comparison</h3>
-                    <div class="performance-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Model</th>
-                                    <th>Method</th>
-                                    <th>Steps</th>
-                                    <th>VBench-2.0</th>
-                                    <th>Speedup</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td rowspan="2">CogVideoX-5B</td>
-                                    <td>Baseline</td>
-                                    <td>50</td>
-                                    <td>0.534</td>
-                                    <td>1.0×</td>
-                                </tr>
-                                <tr class="highlight-row">
-                                    <td>BLADE</td>
-                                    <td>8</td>
-                                    <td><strong>0.569</strong></td>
-                                    <td><strong>8.89×</strong></td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="2">Wan2.1-1.3B</td>
-                                    <td>Baseline</td>
-                                    <td>50</td>
-                                    <td>0.563</td>
-                                    <td>1.0×</td>
-                                </tr>
-                                <tr class="highlight-row">
-                                    <td>BLADE</td>
-                                    <td>8</td>
-                                    <td><strong>0.570</strong></td>
-                                    <td><strong>14.10×</strong></td>
-                                </tr>
-                            </tbody>
-                        </table>
+            <!-- Results Tabs -->
+            <div class="results-tabs">
+                <button class="tab-btn active" data-tab="main-results">Main Results</button>
+                <button class="tab-btn" data-tab="ablation">Ablation Study</button>
+                <button class="tab-btn" data-tab="analysis">Analysis</button>
+            </div>
+            
+            <div class="results-content">
+                <!-- Main Results Tab -->
+                <div id="main-results" class="tab-content active">
+                    <div class="results-grid">
+                        <div class="result-section">
+                            <h3>Performance on VBench-2.0</h3>
+                            <div class="table-image">
+                                <img src="images/Table1.png" alt="Main experimental results on VBench-2.0" class="responsive-img">
+                                <p class="image-caption">
+                                    Comparison with state-of-the-art methods on VBench-2.0. BLADE achieves superior quality while maintaining significant speedup across different video generation models.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="result-section">
+                            <h3>Speed vs Quality Trade-off</h3>
+                            <div class="chart-placeholder">
+                                <img src="images/performance_chart.png" alt="Performance Chart" class="responsive-img">
+                                <p class="image-caption">
+                                    BLADE achieves the best trade-off between generation speed and video quality, outperforming existing acceleration methods.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="result-section">
-                    <h3>Quality vs Speed Trade-off</h3>
-                    <div class="chart-placeholder">
-                        <img src="images/performance_chart.png" alt="Performance Chart" class="responsive-img">
+                <!-- Ablation Study Tab -->
+                <div id="ablation" class="tab-content">
+                    <div class="results-grid">
+                        <div class="result-section full-width">
+                            <h3>Ablation Study Results</h3>
+                            <div class="table-image">
+                                <img src="images/Table2.png" alt="Ablation study results" class="responsive-img">
+                                <p class="image-caption">
+                                    Comprehensive ablation study demonstrating the effectiveness of each component in BLADE. Both ASA mechanism and TDM distillation contribute significantly to the final performance.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Analysis Tab -->
+                <div id="analysis" class="tab-content">
+                    <div class="results-grid">
+                        <div class="result-section full-width">
+                            <h3>Detailed Analysis</h3>
+                            <div class="table-image">
+                                <img src="images/Table3.png" alt="Detailed analysis results" class="responsive-img">
+                                <p class="image-caption">
+                                    In-depth analysis of BLADE's performance across different scenarios, demonstrating consistent improvements in both efficiency and quality metrics.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
