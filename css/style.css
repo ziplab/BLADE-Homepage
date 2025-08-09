@@ -486,7 +486,7 @@ a:hover {
 }
 
 .method-tabs .tab-btn {
-    background: rgba(37, 99, 235, 0.02);
+    background: rgba(37, 99, 235, 0.05);
     border: none;
     padding: 1rem 2rem;
     font-size: 1rem;
@@ -500,11 +500,15 @@ a:hover {
 
 .method-tabs .tab-btn:hover {
     color: var(--primary-color);
+    background: rgba(37, 99, 235, 0.08);
 }
 
 .method-tabs .tab-btn.active {
     color: var(--primary-color);
     border-bottom-color: var(--primary-color);
+    background: rgba(37, 99, 235, 0.08) !important;
+    box-shadow: var(--shadow-light) !important;
+    transform: none !important;
 }
 
 .method-tabs .tab-btn:focus {
@@ -514,7 +518,7 @@ a:hover {
 }
 
 .method-tabs .tab-btn:active {
-    background: rgba(37, 99, 235, 0.1);
+    background: rgba(37, 99, 235, 0.08);
 }
 
 .method-content {
@@ -586,7 +590,7 @@ a:hover {
 }
 
 .results-tabs .tab-btn {
-    background: rgba(37, 99, 235, 0.02);
+    background: rgba(37, 99, 235, 0.05);
     border: none;
     padding: 1rem 2rem;
     font-size: 1rem;
@@ -600,11 +604,15 @@ a:hover {
 
 .results-tabs .tab-btn:hover {
     color: var(--primary-color);
+    background: rgba(37, 99, 235, 0.08);
 }
 
 .results-tabs .tab-btn.active {
     color: var(--primary-color);
     border-bottom-color: var(--primary-color);
+    background: rgba(37, 99, 235, 0.08) !important;
+    box-shadow: var(--shadow-light) !important;
+    transform: none !important;
 }
 
 .results-tabs .tab-btn:focus {
@@ -614,7 +622,7 @@ a:hover {
 }
 
 .results-tabs .tab-btn:active {
-    background: rgba(37, 99, 235, 0.1);
+    background: rgba(37, 99, 235, 0.08);
 }
 
 .results-content {
@@ -659,7 +667,7 @@ a:hover {
 }
 
 .video-model-tabs .tab-btn {
-    background: rgba(37, 99, 235, 0.02);
+    background: rgba(37, 99, 235, 0.05);
     border: none;
     padding: 1rem 2rem;
     font-size: 1rem;
@@ -673,11 +681,15 @@ a:hover {
 
 .video-model-tabs .tab-btn:hover {
     color: var(--primary-color);
+    background: rgba(37, 99, 235, 0.08);
 }
 
 .video-model-tabs .tab-btn.active {
     color: var(--primary-color);
     border-bottom-color: var(--primary-color);
+    background: rgba(37, 99, 235, 0.08) !important;
+    box-shadow: var(--shadow-light) !important;
+    transform: none !important;
 }
 
 .video-model-tabs .tab-btn:focus {
@@ -687,7 +699,7 @@ a:hover {
 }
 
 .video-model-tabs .tab-btn:active {
-    background: rgba(37, 99, 235, 0.1);
+    background: rgba(37, 99, 235, 0.08);
 }
 
 .video-content {
@@ -818,13 +830,19 @@ a:hover {
     box-shadow: var(--shadow-light);
 }
 
-.tab-btn.active,
 .tab-btn:hover {
     background: var(--primary-color);
     color: white;
     border-color: var(--primary-color);
     transform: translateY(-2px);
     box-shadow: var(--shadow-heavy);
+}
+
+.tab-btn.active {
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-medium);
 }
 
 .tab-btn:focus {

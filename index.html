@@ -107,7 +107,7 @@
                         <i class="fas fa-cogs"></i>
                     </div>
                     <h3>Data-Free Joint Training</h3>
-                    <p>First framework to synergistically integrate adaptive sparse attention directly into sparsity-aware step distillation, overcoming limitations of sequential approaches.</p>
+                    <p>Novel framework that synergistically integrates adaptive sparse attention directly into sparsity-aware step distillation, overcoming limitations of sequential approaches.</p>
                 </div>
                 
                 <div class="contribution-card">
@@ -175,17 +175,20 @@
                     </div>
                     
                     <div class="method-description">
-                        <h3>Adaptive Block-Sparse Attention (ASA)</h3>
+                        <h3>Adaptive Block-Sparse Attention (ASA and ASA GT)</h3>
                         <p>
-                            ASA is the core innovation that enables efficient video generation by dynamically determining which spatial-temporal regions require full attention computation and which can be safely sparsified without quality loss.
+                            <strong>Adaptive Block-Sparse Attention (ASA)</strong> is a two-stage sparse attention mechanism that dynamically selects important query-key blocks during each forward pass. It uses a lightweight attention prober followed by threshold-based mask generation, significantly reducing computational cost while maintaining relevance.
+                        </p>
+                        <p>
+                            <strong>ASA GT</strong> extends ASA by introducing a global context preservation mechanism. It appends globally pooled tokens to the key sequence and applies a fixed additive mask, ensuring semantic consistency even under extreme sparsity.
                         </p>
                         
-                        <h4>ASA Features:</h4>
+                        <h4>Key Features:</h4>
                         <ul>
-                            <li><strong>Dynamic Mask Generation:</strong> Content-aware sparsity patterns adapted to each input</li>
-                            <li><strong>Block-Sparse Structure:</strong> Computationally efficient attention patterns</li>
-                            <li><strong>Quality Preservation:</strong> Maintains generation quality while reducing computation</li>
-                            <li><strong>Temporal Consistency:</strong> Ensures coherent video generation across frames</li>
+                            <li><strong>Online Dynamic Block Masking:</strong> Efficient and reliable mask generation at each step without supervision</li>
+                            <li><strong>High Sparsity Support:</strong> Achieves up to 80% sparsity with no performance degradation</li>
+                            <li><strong>Global Context (ASA GT only):</strong> Global tokens with additive masking improve semantic preservation, especially in generative tasks</li>
+                            <li><strong>Training Compatibility:</strong> Supports end-to-end training and integrates well with distillation-based optimization</li>
                         </ul>
                     </div>
                 </div>
@@ -274,14 +277,14 @@
                             <h4>One person helps another person pick up their books</h4>
                             <div class="video-pair">
                                 <div class="video-item">
-                                    <h5>Baseline (50 steps)</h5>
+                                    <h5>One person helps another person pick up their books</h5>
                                     <video controls preload="metadata" loading="lazy">
                                         <source src="videos/cogvideox_baseline_p1.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
                                 </div>
                                 <div class="video-item">
-                                    <h5>BLADE (8 steps)</h5>
+                                    <h5>One person helps another person pick up their books</h5>
                                     <video controls preload="metadata" loading="lazy">
                                         <source src="videos/cogvideox_blade_p1.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
@@ -295,14 +298,14 @@
                             <h4>A person is eating spaghetti with a fork</h4>
                             <div class="video-pair">
                                 <div class="video-item">
-                                    <h5>Baseline (50 steps)</h5>
+                                    <h5>A person is eating spaghetti with a fork</h5>
                                     <video controls preload="metadata" loading="lazy">
                                         <source src="videos/cogvideox_baseline_p3.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
                                 </div>
                                 <div class="video-item">
-                                    <h5>BLADE (8 steps)</h5>
+                                    <h5>A person is eating spaghetti with a fork</h5>
                                     <video controls preload="metadata" loading="lazy">
                                         <source src="videos/cogvideox_blade_p3.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
@@ -316,14 +319,14 @@
                             <h4>A red ball bouncing down stairs</h4>
                             <div class="video-pair">
                                 <div class="video-item">
-                                    <h5>Baseline (50 steps)</h5>
+                                    <h5>A red ball bouncing down stairs</h5>
                                     <video controls preload="metadata" loading="lazy">
                                         <source src="videos/cogvideox_baseline_p8.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
                                 </div>
                                 <div class="video-item">
-                                    <h5>BLADE (8 steps)</h5>
+                                    <h5>A red ball bouncing down stairs</h5>
                                     <video controls preload="metadata" loading="lazy">
                                         <source src="videos/cogvideox_blade_p8.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
@@ -337,14 +340,14 @@
                             <h4>The camera orbits around. Rocket, the camera circles around</h4>
                             <div class="video-pair">
                                 <div class="video-item">
-                                    <h5>Baseline (50 steps)</h5>
+                                    <h5>The camera orbits around. Rocket, the camera circles around</h5>
                                     <video controls preload="metadata" loading="lazy">
                                         <source src="videos/cogvideox_baseline_p11.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
                                 </div>
                                 <div class="video-item">
-                                    <h5>BLADE (8 steps)</h5>
+                                    <h5>The camera orbits around. Rocket, the camera circles around</h5>
                                     <video controls preload="metadata" loading="lazy">
                                         <source src="videos/cogvideox_blade_p11.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
@@ -358,14 +361,14 @@
                             <h4>A gemstone changes from dull to bright</h4>
                             <div class="video-pair">
                                 <div class="video-item">
-                                    <h5>Baseline (50 steps)</h5>
+                                    <h5>A gemstone changes from dull to bright</h5>
                                     <video controls preload="metadata" loading="lazy">
                                         <source src="videos/cogvideox_baseline_p13.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
                                 </div>
                                 <div class="video-item">
-                                    <h5>BLADE (8 steps)</h5>
+                                    <h5>A gemstone changes from dull to bright</h5>
                                     <video controls preload="metadata" loading="lazy">
                                         <source src="videos/cogvideox_blade_p13.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
@@ -384,14 +387,14 @@
                             <h4>One person opens the door for another person</h4>
                             <div class="video-pair">
                                 <div class="video-item">
-                                    <h5>Baseline (50 steps)</h5>
+                                    <h5>One person opens the door for another person</h5>
                                     <video controls preload="metadata" loading="lazy">
                                         <source src="videos/wanx_baseline_p1.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
                                 </div>
                                 <div class="video-item">
-                                    <h5>BLADE (8 steps)</h5>
+                                    <h5>One person opens the door for another person</h5>
                                     <video controls preload="metadata" loading="lazy">
                                         <source src="videos/wanx_blade_p1.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
@@ -405,14 +408,14 @@
                             <h4>The camera orbits around. Taj Mahal, the camera circles around</h4>
                             <div class="video-pair">
                                 <div class="video-item">
-                                    <h5>Baseline (50 steps)</h5>
+                                    <h5>The camera orbits around. Taj Mahal, the camera circles around</h5>
                                     <video controls preload="metadata" loading="lazy">
                                         <source src="videos/wanx_baseline_p3.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
                                 </div>
                                 <div class="video-item">
-                                    <h5>BLADE (8 steps)</h5>
+                                    <h5>The camera orbits around. Taj Mahal, the camera circles around</h5>
                                     <video controls preload="metadata" loading="lazy">
                                         <source src="videos/wanx_blade_p3.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
@@ -426,14 +429,14 @@
                             <h4>A cheetah with the shell of a tortoise, moving quickly but with a protective outer layer</h4>
                             <div class="video-pair">
                                 <div class="video-item">
-                                    <h5>Baseline (50 steps)</h5>
+                                    <h5>A cheetah with the shell of a tortoise, moving quickly but with a protective outer layer</h5>
                                     <video controls preload="metadata" loading="lazy">
                                         <source src="videos/wanx_baseline_p7.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
                                 </div>
                                 <div class="video-item">
-                                    <h5>BLADE (8 steps)</h5>
+                                    <h5>A cheetah with the shell of a tortoise, moving quickly but with a protective outer layer</h5>
                                     <video controls preload="metadata" loading="lazy">
                                         <source src="videos/wanx_blade_p7.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
@@ -447,14 +450,14 @@
                             <h4>A woman is playing ping-pong</h4>
                             <div class="video-pair">
                                 <div class="video-item">
-                                    <h5>Baseline (50 steps)</h5>
+                                    <h5>A woman is playing ping-pong</h5>
                                     <video controls preload="metadata" loading="lazy">
                                         <source src="videos/wanx_baseline_p10.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
                                 </div>
                                 <div class="video-item">
-                                    <h5>BLADE (8 steps)</h5>
+                                    <h5>A woman is playing ping-pong</h5>
                                     <video controls preload="metadata" loading="lazy">
                                         <source src="videos/wanx_blade_p10.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
@@ -468,14 +471,14 @@
                             <h4>The camera orbits around. Birdhouse, the camera circles around</h4>
                             <div class="video-pair">
                                 <div class="video-item">
-                                    <h5>Baseline (50 steps)</h5>
+                                    <h5>The camera orbits around. Birdhouse, the camera circles around</h5>
                                     <video controls preload="metadata" loading="lazy">
                                         <source src="videos/wanx_baseline_p14.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
                                     </video>
                                 </div>
                                 <div class="video-item">
-                                    <h5>BLADE (8 steps)</h5>
+                                    <h5>The camera orbits around. Birdhouse, the camera circles around</h5>
                                     <video controls preload="metadata" loading="lazy">
                                         <source src="videos/wanx_blade_p14.mp4" type="video/mp4">
                                         Your browser does not support the video tag.
