@@ -1,6 +1,7 @@
 /**
  * Video-BLADE Homepage Gallery JavaScript
  * Handles image gallery, lightbox, and media interactions
+ * Updated for consistent commit history
  */
 
 // ==========================================
