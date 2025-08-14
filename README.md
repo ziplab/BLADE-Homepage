@@ -6,71 +6,74 @@ This is the official repository for Video-BLADE, a framework for efficient video
 
 Visit our project homepage: [http://ziplab.co/BLADE-Homepage/](http://ziplab.co/BLADE-Homepage/)
 
-## 🎯 主要特性
+## 🎯 Key Features
 
-- **专业设计**：符合学术界审美标准的现代化设计
-- **响应式布局**：完美适配桌面、平板和手机设备
-- **交互功能**：平滑滚动导航、图片画廊、视频展示
-- **性能优化**：快速加载、懒加载图片、优化动画
-- **可访问性**：支持键盙导航、屏幕阅读器兼容
+  - **Academic-Focused Design**: A modern and professional layout tailored for academic presentation.
+  - **Responsive Layout**: Perfectly adapts to desktops, tablets, and mobile devices.
+  - **Interactive Features**: Smooth scrolling navigation, image gallery, and video showcases.
+  - **Performance Optimized**: Fast loading times, lazy loading for images, and optimized animations.
+  - **Accessibility**: Supports keyboard navigation and is screen reader compatible.
 
-## 📁 文件结构
+## 📁 File Structure
 
 ```
 homepage/
-├── index.html          # 主页面
+├── index.html          # Main page
 ├── css/
-│   ├── style.css      # 主样式文件
-│   └── responsive.css # 响应式样式
+│   ├── style.css      # Main stylesheet
+│   └── responsive.css # Responsive styles
 ├── js/
-│   ├── main.js        # 主要JavaScript功能
-│   └── gallery.js     # 图片画廊功能
-├── images/            # 图片资源
+│   ├── main.js        # Main JavaScript functionalities
+│   └── gallery.js     # Image gallery functionality
+├── images/            # Image assets
 │   ├── method_overview.png
 │   ├── Table1.png
 │   ├── Table2.png
 │   └── ...
-├── videos/            # 视频资源
+├── videos/            # Video assets
 │   ├── cogvideox_baseline_*.mp4
 │   ├── cogvideox_blade_*.mp4
 │   └── ...
-├── assets/            # 其他资源
-├── test.html          # 测试页面
-└── README.md          # 说明文档
+├── assets/            # Other assets
+├── test.html          # Test page
+└── README.md          # README document
 ```
 
-## 🚀 本地测试
+## 🚀 Local Testing
 
-### 方法1：HTTP服务器（推荐）
+### Method 1: Using an HTTP Server (Recommended)
+
 ```bash
 cd homepage
 python3 -m http.server 8000
 ```
-然后在浏览器中访问：http://localhost:8000
 
-### 方法2：直接打开文件
-双击 `index.html` 文件（某些功能可能受限）
+Then, open your browser and navigate to: `http://localhost:8000`
 
-## 🌐 GitHub Pages部署
+### Method 2: Opening the File Directly
 
-本项目已部署到GitHub Pages，可通过以下URL访问：
-http://ziplab.co/BLADE-Homepage/
+Double-click the `index.html` file. Note: some interactive features may be restricted by browser security policies when opening the file directly.
 
-## 🔧 技术栈
+## 🌐 GitHub Pages Deployment
 
-- **HTML5**：语义化标记
-- **CSS3**：现代样式特性（Grid、Flexbox、Variables）
-- **JavaScript**：原生ES6+代码
-- **字体**：Inter（Google Fonts）
-- **图标**：Font Awesome
+This project has been deployed to GitHub Pages and is accessible at the following URL:
+[http://ziplab.co/BLADE-Homepage/](http://ziplab.co/BLADE-Homepage/)
 
-## 📊 性能优化
+## 🔧 Tech Stack
 
-- 图片懒加载
-- CSS和JavaScript压缩（生产环境）
-- 现代浏览器特性检测
-- 渐进式增强设计
+  - **HTML5**: Semantic markup
+  - **CSS3**: Modern styling features (Grid, Flexbox, Variables)
+  - **JavaScript**: Vanilla ES6+
+  - **Fonts**: Inter (from Google Fonts)
+  - **Icons**: Font Awesome
 
----
+## 📊 Performance Optimization
 
-**Video-BLADE Homepage** - 专业、美观、高效的学术论文展示页面
+  - Lazy loading for images
+  - CSS and JavaScript minification (for production)
+  - Modern browser feature detection
+  - Progressive enhancement design
+
+-----
+
+**Video-BLADE Homepage** - A professional, aesthetic, and efficient project page for academic papers.
