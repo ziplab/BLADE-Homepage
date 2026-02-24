@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Video-BLADE: Block-Sparse Attention Meets Step Distillation for Efficient Video Generation - ICLR 2025">
+    <meta name="description" content="BLADE: Block-Sparse Attention Meets Step Distillation for Efficient Video Generation - ICLR 2025">
     <meta name="keywords" content="video generation, diffusion models, sparse attention, step distillation, machine learning, ICLR 2025">
-    <meta name="author" content="Youping Gu, XIAOLONG LI, Yuhao Hu, Bohan Zhuang">
+    <meta name="author" content="Youping Gu, Xiaolong Li, Yuhao Hu, Minqi Chen, Bohan Zhuang">
     <!-- Updated for consistent commit history -->
     
-    <title>Video-BLADE: Block-Sparse Attention Meets Step Distillation for Efficient Video Generation</title>
+    <title>BLADE: Block-Sparse Attention Meets Step Distillation for Efficient Video Generation</title>
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -42,14 +42,15 @@
             </div>
             
             <h1 class="title">
-                <span class="highlight">Video-BLADE</span>: Block-Sparse Attention Meets Step Distillation for Efficient Video Generation
+                <span class="highlight">BLADE</span>: Block-Sparse Attention Meets Step Distillation for Efficient Video Generation
             </h1>
             
             <div class="authors">
                 <div class="author-group">
                     <span class="author">Youping Gu<sup>1*</sup></span>
-                    <span class="author">XIAOLONG LI<sup>1*</sup></span>
+                    <span class="author">Xiaolong Li<sup>1*</sup></span>
                     <span class="author">Yuhao Hu<sup>2</sup></span>
+                    <span class="author">Minqi Chen<sup>2</sup></span>
                     <span class="author">Bohan Zhuang<sup>1</sup></span>
                 </div>
                 
@@ -60,6 +61,8 @@
                 
                 <div class="author-notes">
                     <span><sup>*</sup>Equal contribution</span>
+                    <span><sup>1</sup>{youpgu71, xiaolong.ziplab, bohan.zhuang}@gmail.com</span>
+                    <span><sup>2</sup>huyuhao1@h-partners.com, chenminqi@huawei.com</span>
                 </div>
             </div>
             
@@ -153,7 +156,7 @@
                     <div class="method-diagram">
                         <img src="images/method_overview.png" alt="BLADE Framework Overview" class="responsive-img">
                         <p class="image-caption">
-                            <strong>Figure 1:</strong> The training mechanism of Video-BLADE within a single distillation interval [t<sub>i-1</sub>, t<sub>i</sub>). The Sparse Generator (G<sub>θ</sub>) denoises the input x<sub>t<sub>i</sub></sub> to produce the sample x<sub>t<sub>i-1</sub></sub>. Crucially, this output is then re-corrupted with Gaussian noise to create an intermediate sample x<sub>t<sub>j</sub></sub>. A dedicated <strong>Fake Score</strong> model evaluates this re-noised sample. Its output is contrasted with the score from the <strong>Real Score</strong> model (which is the pre-trained teacher model) to compute the Distribution Matching Loss (∇<sub>θ</sub> D<sub>KL</sub>). This loss directly updates the student generator, forcing it to align its generation trajectory with the teacher's at a distributional level.
+                            <strong>Figure 1:</strong> The training mechanism of BLADE within a single distillation interval [t<sub>i-1</sub>, t<sub>i</sub>). The Sparse Generator (G<sub>θ</sub>) denoises the input x<sub>t<sub>i</sub></sub> to produce the sample x<sub>t<sub>i-1</sub></sub>. Crucially, this output is then re-corrupted with Gaussian noise to create an intermediate sample x<sub>t<sub>j</sub></sub>. A dedicated <strong>Fake Score</strong> model evaluates this re-noised sample. Its output is contrasted with the score from the <strong>Real Score</strong> model (which is the pre-trained teacher model) to compute the Distribution Matching Loss (∇<sub>θ</sub> D<sub>KL</sub>). This loss directly updates the student generator, forcing it to align its generation trajectory with the teacher's at a distributional level.
                         </p>
                     </div>
                     
@@ -517,9 +520,9 @@
         <div class="container">
             <h2 class="section-title">Citation</h2>
             <div class="citation-box">
-                <pre id="bibtex-text">@misc{gu2025videobladeblocksparseattentionmeets,
-      title={Video-BLADE: Block-Sparse Attention Meets Step Distillation for Efficient Video Generation}, 
-      author={Youping Gu and Xiaolong Li and Yuhao Hu and Bohan Zhuang},
+                <pre id="bibtex-text">@misc{gu2025bladeblocksparseattentionmeets,
+      title={BLADE: Block-Sparse Attention Meets Step Distillation for Efficient Video Generation}, 
+      author={Youping Gu and Xiaolong Li and Yuhao Hu and Minqi Chen and Bohan Zhuang},
       year={2025},
       eprint={2508.10774},
       archivePrefix={arXiv},
@@ -536,7 +539,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Video-BLADE. All rights reserved.</p>
+            <p>&copy; 2025 BLADE. All rights reserved.</p>
             <div class="footer-links">
                 <a href="#abstract">Abstract</a>
                 <a href="#method">Method</a>
